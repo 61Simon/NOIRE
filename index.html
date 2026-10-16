@@ -1,0 +1,3520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#f5f2ec" />
+<title>NOIRÉ — Beyond The Ordinary</title>
+<meta name="description" content="NOIRÉ — premium contemporary streetwear. Minimalist luxury, designed for everyday life." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   TOKENS
+   ========================================================================== */
+*,*::before,*::after{box-sizing:border-box}
+
+:root{
+  /* Light theme — default */
+  --bg:#f5f2ec;
+  --bg-alt:#ece7dd;
+  --surface:#ffffff;
+  --surface-2:#f0ebe1;
+  --surface-3:#e6dfd2;
+
+  --fg:#0a0a0a;
+  --fg-soft:#37342f;
+  --muted:#5f5b54;
+  --dim:#928c82;
+  --ghost:#b8b1a5;
+
+  --line:rgba(10,10,10,.10);
+  --line-2:rgba(10,10,10,.22);
+  --line-3:rgba(10,10,10,.40);
+
+  /* Dark theme — immersive sections only */
+  --d-bg:#161616;
+  --d-bg-2:#1e1e1e;
+  --d-bg-3:#272727;
+  --d-surface:#2a2a2a;
+  --d-fg:#f5f2ec;
+  --d-fg-soft:#d8d4cc;
+  --d-muted:#a09c94;
+  --d-dim:#6a6862;
+  --d-line:rgba(245,242,236,.13);
+  --d-line-2:rgba(245,242,236,.24);
+  --d-line-3:rgba(245,242,236,.5);
+
+  --warn:#a13f35;
+
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-out:cubic-bezier(.16,.84,.44,1);
+  --t-fast:.22s;
+  --t:.38s;
+  --t-slow:.7s;
+
+  --hdr:68px;
+  --pad:clamp(20px,4vw,56px);
+}
+
+html{-webkit-text-size-adjust:100%}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  font-size:15px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+  transition:background-color .4s var(--ease),color .4s var(--ease);
+}
+body.no-scroll{overflow:hidden}
+
+img{display:block;max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+button{background:none;border:0;padding:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+ul{margin:0;padding:0;list-style:none}
+h1,h2,h3,h4,p{margin:0}
+::selection{background:var(--fg);color:var(--bg)}
+:focus-visible{outline:1px solid var(--fg);outline-offset:3px}
+#root{min-height:100vh}
+
+/* ==========================================================================
+   LAYOUT
+   ========================================================================== */
+.wrap{width:100%;max-width:1580px;margin:0 auto;padding:0 var(--pad)}
+.section{padding:clamp(76px,9vw,140px) 0}
+.section-tight{padding:clamp(56px,6vw,88px) 0}
+
+.eyebrow{
+  font-size:10px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--muted);
+}
+.h-xl{
+  font-size:clamp(28px,4.4vw,56px);
+  line-height:1.02;font-weight:400;letter-spacing:-.005em;
+  text-transform:uppercase;
+}
+.h-lg{
+  font-size:clamp(20px,2.6vw,32px);
+  line-height:1.15;font-weight:400;letter-spacing:.01em;
+  text-transform:uppercase;
+}
+.h-sm{
+  font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;
+}
+.muted{color:var(--muted)}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+.btn{
+  position:relative;
+  display:inline-flex;align-items:center;justify-content:center;
+  height:52px;padding:0 34px;
+  border:1px solid var(--line-2);
+  background:transparent;
+  color:var(--fg);
+  font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;
+  overflow:hidden;white-space:nowrap;isolation:isolate;
+  transition:
+    color var(--t) var(--ease),
+    border-color var(--t) var(--ease),
+    background-color var(--t) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+.btn>span{position:relative;z-index:2}
+.btn::before{
+  content:'';position:absolute;inset:0;background:var(--fg);z-index:1;
+  transform:translateY(101%);
+  transition:transform .48s var(--ease);
+}
+.btn:hover{color:var(--bg);border-color:var(--fg)}
+.btn:hover::before{transform:translateY(0)}
+.btn:active{transform:translateY(1px);transition-duration:.08s}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn:disabled::before{display:none}
+
+.btn-solid{
+  background:var(--fg);color:var(--bg);border-color:var(--fg);
+}
+.btn-solid::before{background:var(--bg)}
+.btn-solid:hover{color:var(--fg);border-color:var(--fg)}
+.btn-solid:hover::before{transform:translateY(0)}
+
+.btn-sm{height:42px;padding:0 22px;font-size:10px;letter-spacing:.22em}
+.btn-block{width:100%}
+
+/* On dark surfaces */
+.btn-on-dark{
+  border-color:var(--d-line-3);color:var(--d-fg);
+}
+.btn-on-dark::before{background:var(--d-fg)}
+.btn-on-dark:hover{color:#161616;border-color:var(--d-fg)}
+.btn-on-dark.btn-solid{
+  background:var(--d-fg);color:#161616;border-color:var(--d-fg);
+}
+.btn-on-dark.btn-solid::before{background:transparent}
+.btn-on-dark.btn-solid:hover{background:transparent;color:var(--d-fg);border-color:var(--d-fg)}
+
+.u-link{
+  position:relative;display:inline-block;
+  font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--muted);
+  transition:color var(--t) var(--ease);
+}
+.u-link::after{
+  content:'';position:absolute;left:0;bottom:-4px;height:1px;width:100%;
+  background:currentColor;transform:scaleX(0);transform-origin:left;
+  transition:transform .5s var(--ease);
+}
+.u-link:hover{color:var(--fg)}
+.u-link:hover::after{transform:scaleX(1)}
+
+/* ==========================================================================
+   REVEAL
+   ========================================================================== */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
+.reveal.is-in{opacity:1;transform:none}
+.page-enter{animation:pageIn .45s var(--ease-out) both}
+@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:120;
+  border-bottom:1px solid transparent;
+  color:var(--fg);
+  background:transparent;
+  transition:background-color .4s var(--ease),border-color .4s var(--ease),color .25s var(--ease);
+}
+.header.is-solid{
+  background:rgba(245,242,236,.9);
+  backdrop-filter:blur(20px) saturate(150%);
+  -webkit-backdrop-filter:blur(20px) saturate(150%);
+  border-bottom-color:var(--line);
+  color:var(--fg);
+}
+.header.on-hero{color:var(--d-fg)}
+.header.on-hero .logo,
+.header.on-hero .main-nav a,
+.header.on-hero .icon-btn{color:var(--d-fg)}
+.header.on-hero .currency-toggle{border-color:var(--d-line-2);color:var(--d-fg)}
+.header.on-hero .currency-toggle button.is-active{background:var(--d-fg);color:#161616}
+.header.on-hero .cart-count{background:var(--d-fg);color:#161616}
+
+.header-inner{
+  position:relative;height:var(--hdr);
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+
+.logo{
+  font-size:18px;letter-spacing:.4em;font-weight:500;
+  text-transform:uppercase;line-height:1;
+  transition:opacity var(--t) var(--ease);
+  padding-right:3px;
+}
+.logo:hover{opacity:.7}
+
+.main-nav{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  display:flex;gap:38px;
+}
+.main-nav a{
+  position:relative;
+  font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+  opacity:.72;padding:4px 0;
+  transition:opacity var(--t) var(--ease);
+}
+.main-nav a::after{
+  content:'';position:absolute;left:0;bottom:0;height:1px;width:100%;
+  background:currentColor;transform:scaleX(0);transform-origin:left;
+  transition:transform .4s var(--ease);
+}
+.main-nav a:hover{opacity:1}
+.main-nav a:hover::after{transform:scaleX(1)}
+.main-nav a.is-active{opacity:1}
+.main-nav a.is-active::after{transform:scaleX(1)}
+
+.header-actions{display:flex;align-items:center;gap:2px}
+.icon-btn{
+  position:relative;width:40px;height:40px;display:grid;place-items:center;
+  opacity:.88;
+  transition:opacity var(--t) var(--ease),transform var(--t-fast) var(--ease);
+}
+.icon-btn:hover{opacity:1;transform:translateY(-1px)}
+.icon-btn:active{transform:translateY(0);opacity:.7}
+.cart-count{
+  position:absolute;top:2px;right:2px;
+  min-width:16px;height:16px;padding:0 4px;
+  background:var(--fg);color:var(--bg);
+  font-size:9px;font-weight:600;line-height:16px;
+  text-align:center;border-radius:999px;
+  animation:popIn .3s var(--ease-out);
+}
+@keyframes popIn{from{transform:scale(.5);opacity:0}to{transform:none;opacity:1}}
+
+.currency-toggle{
+  display:flex;align-items:center;height:28px;margin:0 8px;
+  border:1px solid var(--line-2);border-radius:2px;overflow:hidden;
+  transition:border-color var(--t) var(--ease);
+}
+.currency-toggle button{
+  padding:0 10px;height:100%;
+  font-size:9.5px;letter-spacing:.2em;font-weight:500;
+  color:currentColor;opacity:.6;
+  transition:opacity var(--t-fast) var(--ease),background var(--t-fast) var(--ease),color var(--t-fast) var(--ease);
+}
+.currency-toggle button:hover{opacity:.95}
+.currency-toggle button.is-active{opacity:1;background:var(--fg);color:var(--bg)}
+
+.menu-btn{display:none}
+@media (max-width:1080px){
+  .main-nav{display:none}
+  .menu-btn{display:grid}
+}
+@media (max-width:520px){
+  .currency-toggle{margin:0 2px}
+  .currency-toggle button{padding:0 7px;font-size:9px}
+}
+
+/* ==========================================================================
+   MOBILE MENU
+   ========================================================================== */
+.mobile-menu{
+  position:fixed;inset:0;z-index:130;
+  background:var(--d-bg);color:var(--d-fg);
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:calc(var(--hdr) + 30px) var(--pad) 40px;
+  opacity:0;visibility:hidden;
+  transition:opacity .4s var(--ease),visibility .4s;
+}
+.mobile-menu.is-open{opacity:1;visibility:visible}
+.mm-close{
+  position:absolute;top:14px;right:var(--pad);
+  width:40px;height:40px;display:grid;place-items:center;color:var(--d-fg);
+  transition:opacity var(--t) var(--ease);
+}
+.mm-close:hover{opacity:.7}
+.mm-nav{display:flex;flex-direction:column;gap:6px;margin-top:20px}
+.mm-link{
+  text-align:left;
+  font-size:clamp(28px,8.5vw,44px);
+  line-height:1.14;letter-spacing:.01em;
+  text-transform:uppercase;font-weight:400;
+  color:var(--d-fg);
+  opacity:0;transform:translateY(16px);
+  transition:opacity .55s var(--ease-out),transform .55s var(--ease-out),color var(--t) var(--ease);
+  padding:6px 0;border-bottom:1px solid var(--d-line);
+}
+.mobile-menu.is-open .mm-link{opacity:1;transform:none}
+.mm-link:hover{color:var(--d-muted)}
+.mm-foot{
+  display:flex;flex-wrap:wrap;gap:22px;align-items:center;
+  font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--d-dim);
+}
+.mm-foot button{transition:color var(--t) var(--ease)}
+.mm-foot button:hover{color:var(--d-fg)}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero{
+  position:relative;height:100svh;min-height:640px;
+  overflow:hidden;background:#0d0d0d;
+}
+.hero-media{position:absolute;inset:0}
+.hero-media img{
+  width:100%;height:100%;object-fit:cover;object-position:58% 22%;
+  animation:heroFade 1.4s var(--ease-out) both;
+}
+@keyframes heroFade{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:scale(1)}}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.84) 0%,rgba(0,0,0,.5) 42%,rgba(0,0,0,.2) 100%),
+    linear-gradient(0deg,rgba(0,0,0,.76) 0%,rgba(0,0,0,0) 55%);
+}
+.hero-content{
+  position:relative;z-index:3;height:100%;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding-bottom:clamp(88px,12vh,132px);
+  color:#fff;
+}
+.hero-eyebrow{
+  font-size:9.5px;letter-spacing:.38em;text-transform:uppercase;
+  color:rgba(255,255,255,.66);margin-bottom:22px;
+}
+.hero-title{display:flex;flex-direction:column;gap:2px;font-weight:400;max-width:1120px}
+.hero-brand{
+  font-size:clamp(46px,8.2vw,124px);
+  line-height:.92;letter-spacing:.06em;font-weight:300;
+}
+.hero-sub{
+  font-size:clamp(16px,2.8vw,42px);
+  line-height:1.12;letter-spacing:.05em;color:rgba(255,255,255,.94);
+}
+.hero-caption{
+  margin-top:26px;
+  font-size:9.5px;letter-spacing:.34em;text-transform:uppercase;
+  color:rgba(255,255,255,.66);
+}
+.hero-cta{margin-top:40px}
+.hero-eyebrow,.hero-title,.hero-caption,.hero-cta{animation:heroUp 1s var(--ease-out) both}
+.hero-title{animation-delay:.08s}
+.hero-caption{animation-delay:.2s}
+.hero-cta{animation-delay:.3s}
+@keyframes heroUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+.hero-scroll{
+  position:absolute;right:var(--pad);bottom:34px;z-index:3;
+  display:flex;flex-direction:column;align-items:flex-end;gap:12px;
+  animation:heroUp 1s var(--ease-out) .55s both;
+}
+.hero-scroll span:first-child{
+  font-size:9px;letter-spacing:.32em;text-transform:uppercase;
+  color:rgba(255,255,255,.66);
+}
+.hero-scroll-line{
+  position:relative;width:1px;height:58px;
+  background:rgba(255,255,255,.2);overflow:hidden;
+}
+.hero-scroll-line::after{
+  content:'';position:absolute;left:0;top:-60%;width:1px;height:60%;
+  background:#fff;animation:scrollDot 2.4s var(--ease) infinite;
+}
+@keyframes scrollDot{0%{top:-60%}60%,100%{top:110%}}
+@media (max-width:760px){.hero-scroll{display:none}}
+
+/* ==========================================================================
+   SECTION HEAD
+   ========================================================================== */
+.sec-head{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:28px;flex-wrap:wrap;
+  padding-bottom:28px;border-bottom:1px solid var(--line);
+  margin-bottom:clamp(34px,4vw,52px);
+}
+.sec-head-left{display:flex;align-items:baseline;gap:26px;flex-wrap:wrap}
+.sec-head .h-xl{line-height:.95}
+
+/* ==========================================================================
+   PRODUCT GRID / CARD
+   ========================================================================== */
+.grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:clamp(28px,3vw,48px) clamp(12px,1.4vw,20px);
+}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+@media (max-width:1180px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:820px){
+  .grid,.grid-3{grid-template-columns:repeat(2,1fr);gap:30px 12px}
+}
+
+.card{
+  position:relative;display:flex;flex-direction:column;text-align:left;
+  cursor:pointer;
+}
+.card-media{
+  position:relative;display:block;width:100%;
+  aspect-ratio:3/4;overflow:hidden;
+  background:var(--surface-2);
+}
+.card-media img{
+  width:100%;height:100%;object-fit:cover;
+  transition:opacity .5s var(--ease-out),transform 1.2s var(--ease-out);
+}
+.card-media .img-a{position:relative;z-index:1}
+.card-media .img-b{position:absolute;inset:0;z-index:2;opacity:0}
+.card:hover .img-b{opacity:1}
+.card:hover .card-media img{transform:scale(1.04)}
+
+.card-badge{
+  position:absolute;top:12px;left:12px;z-index:6;
+  padding:5px 10px;
+  background:var(--fg);color:var(--bg);
+  font-size:8.5px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;
+}
+.card-wish{
+  position:absolute;top:11px;right:11px;z-index:6;
+  width:36px;height:36px;display:grid;place-items:center;
+  background:rgba(255,255,255,.95);color:var(--fg);
+  opacity:0;transform:translateY(-5px);
+  transition:opacity var(--t) var(--ease-out),transform var(--t) var(--ease-out),background var(--t-fast) var(--ease),color var(--t-fast) var(--ease);
+}
+.card:hover .card-wish{opacity:1;transform:none}
+.card-wish:hover{background:var(--fg);color:var(--bg)}
+.card-wish.is-active{opacity:1;transform:none;background:var(--fg);color:var(--bg)}
+@media (hover:none){.card-wish{opacity:1;transform:none}}
+
+.quick-add{
+  position:absolute;left:12px;right:12px;bottom:12px;z-index:6;height:44px;
+  background:rgba(10,10,10,.94);color:#f5f2ec;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;
+  opacity:0;transform:translateY(10px);
+  transition:opacity var(--t) var(--ease-out),transform var(--t) var(--ease-out),background var(--t-fast) var(--ease);
+}
+.quick-add:hover{background:#000}
+.quick-add:active{transform:translateY(9px)}
+.card:hover .quick-add{opacity:1;transform:none}
+@media (hover:none){.quick-add{opacity:1;transform:none}}
+
+.card-info{padding-top:16px;display:flex;flex-direction:column;gap:6px}
+.card-name{
+  font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
+  transition:opacity var(--t) var(--ease);
+}
+.card:hover .card-name{opacity:.72}
+.card-price{font-size:12px;letter-spacing:.08em;color:var(--muted)}
+.card-colors{display:flex;gap:6px;margin-top:6px}
+.dot{width:11px;height:11px;border-radius:50%;border:1px solid rgba(128,128,128,.45)}
+
+/* ==========================================================================
+   EDITORIAL BANNER
+   ========================================================================== */
+.editorial{
+  position:relative;min-height:min(88vh,820px);
+  display:flex;align-items:center;overflow:hidden;
+  background:var(--d-bg);color:var(--d-fg);
+}
+.editorial img{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;object-position:center 35%;
+}
+.editorial-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.76));
+}
+.editorial-content{
+  position:relative;z-index:3;width:100%;
+  text-align:center;display:flex;flex-direction:column;align-items:center;gap:22px;
+  padding:110px 0;
+}
+.editorial-title{
+  font-size:clamp(30px,6vw,82px);
+  line-height:.98;letter-spacing:.03em;text-transform:uppercase;font-weight:300;
+}
+.editorial-sub{
+  font-size:clamp(10px,1.3vw,13px);
+  letter-spacing:.32em;text-transform:uppercase;
+  color:rgba(255,255,255,.76);line-height:2;
+}
+
+/* ==========================================================================
+   ABOUT
+   ========================================================================== */
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:clamp(32px,6vw,96px);align-items:center;
+}
+@media (max-width:900px){.about-grid{grid-template-columns:1fr}}
+.about-media{
+  position:relative;aspect-ratio:4/5;overflow:hidden;
+  background:var(--surface-2);
+}
+.about-media img{width:100%;height:100%;object-fit:cover}
+.about-text p{
+  max-width:52ch;color:var(--muted);font-size:15px;line-height:1.85;
+}
+.principles{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  margin-top:clamp(56px,7vw,96px);
+  border-top:1px solid var(--line);padding-top:36px;
+}
+@media (max-width:700px){.principles{grid-template-columns:1fr;gap:22px}}
+.principle{display:flex;flex-direction:column;gap:12px}
+.principle .num{font-size:10px;letter-spacing:.3em;color:var(--dim)}
+.principle .ttl{font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:500}
+
+/* ==========================================================================
+   PAGE
+   ========================================================================== */
+.page{padding-top:var(--hdr)}
+.page-head{
+  padding:clamp(48px,7vw,88px) 0 clamp(32px,4vw,52px);
+  border-bottom:1px solid var(--line);
+}
+.page-head .h-xl{margin-bottom:20px}
+.page-head p{max-width:56ch;color:var(--muted);font-size:14px;line-height:1.85}
+
+/* ==========================================================================
+   CATALOG
+   ========================================================================== */
+.catalog-layout{
+  display:grid;grid-template-columns:240px 1fr;
+  gap:clamp(28px,4vw,64px);align-items:start;
+  padding-top:clamp(32px,4vw,54px);
+  padding-bottom:clamp(76px,9vw,140px);
+}
+.filters-desktop{position:sticky;top:calc(var(--hdr) + 24px)}
+.filter-group{border-bottom:1px solid var(--line);padding:22px 0}
+.filter-group:first-child{padding-top:0}
+.filter-title{
+  display:flex;align-items:center;justify-content:space-between;width:100%;
+  font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--fg);
+  margin-bottom:16px;font-weight:500;
+}
+.filter-list{display:flex;flex-direction:column;gap:10px}
+.filter-opt{
+  display:flex;align-items:center;gap:10px;text-align:left;
+  font-size:12.5px;letter-spacing:.04em;color:var(--muted);
+  transition:color var(--t) var(--ease);
+}
+.filter-opt:hover{color:var(--fg)}
+.filter-opt.is-active{color:var(--fg)}
+.filter-opt .box{
+  width:14px;height:14px;flex:0 0 auto;
+  border:1px solid var(--line-2);
+  display:grid;place-items:center;
+  transition:background var(--t-fast) var(--ease),border-color var(--t-fast) var(--ease);
+}
+.filter-opt.is-active .box{background:var(--fg);border-color:var(--fg);color:var(--bg)}
+
+.size-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.size-chip{
+  height:38px;padding:0 10px;
+  border:1px solid var(--line-2);
+  background:var(--surface);
+  font-size:11px;letter-spacing:.1em;color:var(--fg-soft);
+  transition:background var(--t-fast) var(--ease),color var(--t-fast) var(--ease),border-color var(--t-fast) var(--ease);
+}
+.size-chip:hover{border-color:var(--fg)}
+.size-chip.is-active{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+
+.color-row{display:flex;flex-wrap:wrap;gap:12px}
+.color-swatch{
+  width:26px;height:26px;border-radius:50%;
+  border:1px solid rgba(128,128,128,.5);
+  position:relative;
+  transition:transform var(--t-fast) var(--ease);
+}
+.color-swatch:hover{transform:scale(1.08)}
+.color-swatch.is-active::after{
+  content:'';position:absolute;inset:-5px;
+  border:1px solid var(--fg);border-radius:50%;
+}
+
+.price-values{
+  display:flex;justify-content:space-between;
+  font-size:11.5px;letter-spacing:.08em;color:var(--muted);
+  margin-bottom:14px;
+}
+input[type=range]{
+  width:100%;-webkit-appearance:none;appearance:none;
+  background:transparent;margin:6px 0;display:block;
+}
+input[type=range]::-webkit-slider-runnable-track{height:1px;background:var(--line-2)}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:14px;height:14px;border-radius:50%;
+  background:var(--fg);margin-top:-6.5px;cursor:pointer;
+}
+input[type=range]::-moz-range-track{height:1px;background:var(--line-2)}
+input[type=range]::-moz-range-thumb{
+  width:14px;height:14px;border:0;border-radius:50%;background:var(--fg);cursor:pointer;
+}
+
+.clear-all{
+  margin-top:24px;
+  font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--line-2);padding-bottom:3px;
+  transition:color var(--t) var(--ease),border-color var(--t) var(--ease);
+}
+.clear-all:hover{color:var(--fg);border-color:var(--fg)}
+
+.catalog-bar{
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  padding-bottom:22px;border-bottom:1px solid var(--line);
+  margin-bottom:clamp(26px,3vw,38px);
+}
+.catalog-count{
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+}
+.sort-wrap{position:relative;display:flex;align-items:center;gap:10px}
+.sort-wrap label{
+  font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--dim);
+}
+.sort-select{
+  appearance:none;-webkit-appearance:none;background:transparent;border:0;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  padding:8px 28px 8px 0;cursor:pointer;
+  transition:opacity var(--t) var(--ease);
+}
+.sort-select:hover{opacity:.75}
+.sort-wrap::after{
+  content:'';position:absolute;right:6px;top:50%;
+  width:6px;height:6px;
+  border-right:1px solid var(--fg);border-bottom:1px solid var(--fg);
+  transform:translateY(-70%) rotate(45deg);
+  pointer-events:none;
+}
+
+.mobile-filter-bar{display:none}
+.filters-mobile{display:none}
+
+@media (max-width:980px){
+  .catalog-layout{grid-template-columns:1fr;gap:0}
+  .filters-desktop{display:none}
+  .mobile-filter-bar{
+    display:flex;align-items:center;justify-content:space-between;gap:14px;
+    padding-bottom:20px;border-bottom:1px solid var(--line);
+    margin-bottom:28px;
+  }
+  .mobile-filter-bar .btn{flex:1}
+  .filters-mobile{
+    display:block;
+    position:fixed;inset:0;z-index:150;
+    background:var(--bg);
+    padding:24px var(--pad) 60px;overflow-y:auto;
+    transform:translateX(-102%);
+    transition:transform .5s var(--ease-out);
+  }
+  .filters-mobile.is-open{transform:none}
+  .filters-head{
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:26px;
+  }
+}
+@media (min-width:981px){.filters-head{display:none}}
+
+.empty-state{
+  grid-column:1/-1;
+  display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;
+  padding:clamp(56px,10vw,124px) 20px;
+  animation:pageIn .5s var(--ease-out) both;
+}
+.empty-state .h-lg{max-width:20ch}
+
+/* ==========================================================================
+   PDP
+   ========================================================================== */
+.pdp{
+  display:grid;grid-template-columns:1.15fr .85fr;
+  gap:clamp(30px,5vw,84px);align-items:start;
+  padding:clamp(30px,4vw,54px) 0 clamp(64px,7vw,112px);
+}
+@media (max-width:980px){.pdp{grid-template-columns:1fr;gap:36px}}
+.pdp-gallery{position:sticky;top:calc(var(--hdr) + 22px)}
+@media (max-width:980px){.pdp-gallery{position:static}}
+.pdp-main{
+  position:relative;aspect-ratio:4/5;overflow:hidden;
+  background:var(--surface-2);
+}
+.pdp-main img{width:100%;height:100%;object-fit:cover;transition:opacity .4s var(--ease)}
+.pdp-thumbs{display:flex;gap:10px;margin-top:12px}
+.pdp-thumbs button{
+  width:76px;height:96px;overflow:hidden;
+  border:1px solid transparent;opacity:.6;background:var(--surface-2);
+  transition:opacity var(--t-fast) var(--ease),border-color var(--t-fast) var(--ease);
+}
+.pdp-thumbs button:hover{opacity:.9}
+.pdp-thumbs button.is-active{opacity:1;border-color:var(--line-3)}
+.pdp-thumbs img{width:100%;height:100%;object-fit:cover}
+
+.pdp-info{display:flex;flex-direction:column;gap:24px}
+.pdp-crumb{
+  display:flex;gap:8px;flex-wrap:wrap;
+  font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--dim);
+}
+.pdp-crumb button{transition:color var(--t) var(--ease)}
+.pdp-crumb button:hover{color:var(--fg)}
+.pdp-title{
+  font-size:clamp(22px,3vw,34px);
+  line-height:1.12;letter-spacing:.02em;text-transform:uppercase;font-weight:400;
+}
+.pdp-price{font-size:17px;letter-spacing:.08em}
+.pdp-desc{color:var(--muted);font-size:14px;line-height:1.9;max-width:48ch}
+.opt-label{
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:10px;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:14px;
+}
+.opt-label button{
+  color:var(--fg);
+  border-bottom:1px solid var(--line-2);padding-bottom:2px;
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  transition:opacity var(--t) var(--ease);
+}
+.opt-label button:hover{opacity:.65}
+
+.size-grid-pdp{display:flex;flex-wrap:wrap;gap:8px}
+.size-grid-pdp .size-chip{min-width:58px;height:46px;padding:0 14px}
+
+.color-row-pdp{display:flex;gap:12px}
+.color-swatch-lg{width:30px;height:30px}
+
+.field-error{
+  font-size:11px;letter-spacing:.14em;
+  color:var(--warn);text-transform:uppercase;
+  animation:pageIn .35s var(--ease-out) both;
+}
+
+.qty{
+  display:inline-flex;align-items:center;
+  border:1px solid var(--line-2);background:var(--surface);
+}
+.qty button{width:46px;height:48px;display:grid;place-items:center;transition:background var(--t-fast) var(--ease)}
+.qty button:hover{background:var(--surface-2)}
+.qty button:active{background:var(--surface-3)}
+.qty span{min-width:46px;text-align:center;font-size:13px;letter-spacing:.08em}
+
+.pdp-actions{display:flex;gap:10px;align-items:stretch}
+.pdp-actions .btn{flex:1;height:52px}
+.wish-btn{
+  width:52px;height:52px;
+  border:1px solid var(--line-2);
+  background:var(--surface);
+  display:grid;place-items:center;
+  transition:background var(--t) var(--ease),color var(--t) var(--ease),border-color var(--t) var(--ease);
+}
+.wish-btn:hover{border-color:var(--fg)}
+.wish-btn.is-active{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+
+.pdp-note{
+  font-size:11.5px;letter-spacing:.06em;color:var(--muted);
+  display:flex;flex-direction:column;gap:6px;padding-top:4px;
+}
+
+.acc{border-top:1px solid var(--line);margin-top:6px}
+.acc-item{border-bottom:1px solid var(--line)}
+.acc-head{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:20px 0;
+  font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;text-align:left;
+  transition:opacity var(--t) var(--ease);
+}
+.acc-head:hover{opacity:.7}
+.acc-head .plus{position:relative;width:11px;height:11px;flex:0 0 auto}
+.acc-head .plus::before,.acc-head .plus::after{
+  content:'';position:absolute;background:currentColor;
+  transition:transform var(--t) var(--ease),opacity var(--t) var(--ease);
+}
+.acc-head .plus::before{left:0;top:5px;width:11px;height:1px}
+.acc-head .plus::after{top:0;left:5px;width:1px;height:11px}
+.acc-item.is-open .plus::after{transform:scaleY(0)}
+.acc-body{overflow:hidden;max-height:0;transition:max-height .45s var(--ease)}
+.acc-item.is-open .acc-body{max-height:520px}
+.acc-body-inner{padding:0 0 24px;color:var(--muted);font-size:13.5px;line-height:1.95}
+.acc-body-inner li{position:relative;padding-left:16px;margin-bottom:6px}
+.acc-body-inner li::before{
+  content:'';position:absolute;left:0;top:12px;
+  width:6px;height:1px;background:currentColor;
+}
+
+/* ==========================================================================
+   CART DRAWER
+   ========================================================================== */
+.overlay{
+  position:fixed;inset:0;z-index:140;
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  opacity:0;visibility:hidden;
+  transition:opacity var(--t) var(--ease),visibility var(--t);
+}
+.overlay.is-open{opacity:1;visibility:visible}
+
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;z-index:150;
+  width:min(440px,100vw);
+  background:var(--d-bg);color:var(--d-fg);
+  display:flex;flex-direction:column;
+  transform:translateX(102%);
+  transition:transform .5s var(--ease-out);
+  border-left:1px solid var(--d-line);
+}
+.drawer.is-open{transform:none}
+.drawer-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:24px 26px;border-bottom:1px solid var(--d-line);
+}
+.drawer-head .h-sm{font-size:11px;letter-spacing:.28em;text-transform:uppercase}
+.drawer-body{flex:1;overflow-y:auto;padding:8px 26px}
+.drawer-foot{
+  border-top:1px solid var(--d-line);
+  padding:24px 26px 28px;background:var(--d-bg);
+}
+.cart-line{
+  display:grid;grid-template-columns:80px 1fr;gap:16px;
+  padding:22px 0;border-bottom:1px solid var(--d-line);
+  animation:pageIn .35s var(--ease-out) both;
+}
+.cart-line-img{width:80px;height:100px;object-fit:cover;background:var(--d-bg-3)}
+.cart-line-top{display:flex;justify-content:space-between;gap:12px}
+.cart-line-name{
+  font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;line-height:1.5;
+}
+.cart-line-meta{font-size:11px;color:var(--d-muted);margin-top:6px;letter-spacing:.06em}
+.cart-line-price{font-size:12px;letter-spacing:.06em;white-space:nowrap}
+.cart-line-actions{
+  display:flex;align-items:center;justify-content:space-between;margin-top:14px;
+}
+.qty-mini{display:inline-flex;align-items:center;border:1px solid var(--d-line-2)}
+.qty-mini button{
+  width:30px;height:30px;display:grid;place-items:center;
+  transition:background var(--t-fast) var(--ease);
+}
+.qty-mini button:hover{background:rgba(255,255,255,.08)}
+.qty-mini span{min-width:30px;text-align:center;font-size:12px}
+.remove-btn{
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--d-muted);
+  transition:color var(--t) var(--ease);
+}
+.remove-btn:hover{color:var(--d-fg)}
+.sum-row{
+  display:flex;justify-content:space-between;
+  font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--d-muted);margin-bottom:12px;
+}
+.sum-row.total{
+  color:var(--d-fg);font-size:13px;
+  margin-top:16px;padding-top:16px;
+  border-top:1px solid var(--d-line);
+}
+.sum-note{
+  font-size:10.5px;color:var(--d-dim);letter-spacing:.06em;
+  margin-bottom:20px;line-height:1.7;
+}
+.cart-empty{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:22px;text-align:center;padding:40px 30px;color:var(--d-muted);
+}
+.cart-empty .h-sm{
+  font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--d-fg);
+}
+
+/* ==========================================================================
+   SEARCH
+   ========================================================================== */
+.search-overlay{
+  position:fixed;inset:0;z-index:160;
+  background:rgba(22,22,22,.98);color:var(--d-fg);
+  opacity:0;visibility:hidden;
+  transition:opacity var(--t) var(--ease),visibility var(--t);
+  display:flex;flex-direction:column;
+}
+.search-overlay.is-open{opacity:1;visibility:visible}
+.search-top{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px var(--pad);border-bottom:1px solid var(--d-line);
+}
+.search-field{
+  display:flex;align-items:center;gap:16px;
+  padding:clamp(28px,5vw,54px) var(--pad) 26px;
+  border-bottom:1px solid var(--d-line);
+}
+.search-field input{
+  flex:1;background:transparent;border:0;outline:none;
+  font-size:clamp(20px,4vw,42px);
+  letter-spacing:.01em;font-weight:300;color:var(--d-fg);
+}
+.search-field input::placeholder{color:var(--d-dim)}
+.search-results{flex:1;overflow-y:auto;padding:clamp(26px,4vw,44px) var(--pad) 60px}
+.search-hint{
+  font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--d-dim);margin-bottom:26px;
+}
+.search-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px 16px}
+@media (max-width:900px){.search-grid{grid-template-columns:repeat(2,1fr)}}
+.search-empty{display:flex;flex-direction:column;gap:14px;align-items:flex-start;padding:40px 0}
+.search-empty .h-lg{text-transform:uppercase}
+.search-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.search-chip{
+  border:1px solid var(--d-line-2);padding:10px 18px;
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--d-muted);
+  transition:color var(--t) var(--ease),border-color var(--t) var(--ease);
+}
+.search-chip:hover{color:var(--d-fg);border-color:var(--d-line-3)}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.footer{
+  background:var(--d-bg);color:var(--d-fg);
+  padding:clamp(64px,8vw,112px) 0 34px;
+  border-top:1px solid var(--d-line);
+}
+.footer-grid{
+  display:grid;grid-template-columns:1.7fr 1fr 1fr 1.6fr;
+  gap:clamp(30px,4vw,60px);
+}
+@media (max-width:980px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:600px){.footer-grid{grid-template-columns:1fr}}
+.footer-logo{
+  font-size:22px;letter-spacing:.4em;text-transform:uppercase;font-weight:500;
+  margin-bottom:20px;padding-right:3px;
+}
+.footer-brand p{color:var(--d-muted);font-size:13px;line-height:1.85;max-width:34ch}
+.footer-col h4{
+  font-size:10px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--d-dim);margin-bottom:20px;font-weight:500;
+}
+.footer-col ul{display:flex;flex-direction:column;gap:12px}
+.footer-col button,.footer-col a{
+  font-size:12.5px;letter-spacing:.06em;color:var(--d-fg-soft);
+  transition:color var(--t) var(--ease);text-align:left;
+}
+.footer-col button:hover,.footer-col a:hover{color:var(--d-fg)}
+.nl-form{display:flex;border-bottom:1px solid var(--d-line-2);margin-top:6px}
+.nl-form input{
+  flex:1;background:transparent;border:0;outline:none;
+  padding:12px 0;font-size:13px;color:var(--d-fg);letter-spacing:.04em;
+}
+.nl-form input::placeholder{color:var(--d-dim)}
+.nl-form button{
+  font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--d-fg);padding:0 4px 0 16px;white-space:nowrap;
+  transition:opacity var(--t) var(--ease);
+}
+.nl-form button:hover{opacity:.7}
+.nl-msg{font-size:11px;margin-top:12px;letter-spacing:.06em;min-height:16px}
+.nl-msg.ok{color:#8fbf8f}
+.nl-msg.err{color:#e08282}
+.footer-bottom{
+  margin-top:clamp(52px,6vw,86px);padding-top:26px;
+  border-top:1px solid var(--d-line);
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+}
+.footer-bottom .copy{
+  font-size:11px;letter-spacing:.16em;color:var(--d-dim);text-transform:uppercase;
+}
+.socials{display:flex;gap:24px}
+.socials a{
+  font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--d-muted);
+  transition:color var(--t) var(--ease);
+}
+.socials a:hover{color:var(--d-fg)}
+
+/* ==========================================================================
+   CHECKOUT & INFO
+   ========================================================================== */
+.notice{
+  background:var(--surface);
+  border:1px solid var(--line-2);
+  padding:18px 20px;
+  font-size:12px;letter-spacing:.05em;color:var(--muted);line-height:1.85;
+}
+.notice strong{color:var(--fg);font-weight:500}
+
+.field{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.field label{
+  font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);
+}
+.field input,.field textarea{
+  background:var(--surface);
+  border:1px solid var(--line-2);
+  color:var(--fg);
+  padding:14px 16px;
+  font-size:14px;
+  outline:none;width:100%;
+  transition:border-color var(--t) var(--ease),box-shadow var(--t) var(--ease);
+}
+.field input::placeholder,.field textarea::placeholder{color:var(--ghost)}
+.field input:hover,.field textarea:hover{border-color:var(--line-3)}
+.field input:focus,.field textarea:focus{
+  border-color:var(--fg);
+  box-shadow:0 0 0 3px rgba(10,10,10,.06);
+}
+.field input.err{
+  border-color:var(--warn);
+  box-shadow:0 0 0 3px rgba(161,63,53,.12);
+}
+
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
+@media (max-width:700px){.form-grid{grid-template-columns:1fr}}
+
+.checkout-layout{
+  display:grid;grid-template-columns:1.3fr .9fr;
+  gap:clamp(30px,5vw,76px);align-items:start;
+  padding:clamp(36px,5vw,66px) 0 clamp(72px,9vw,132px);
+}
+@media (max-width:900px){.checkout-layout{grid-template-columns:1fr}}
+
+.summary-box{
+  background:var(--surface);
+  border:1px solid var(--line-2);
+  padding:26px;
+  position:sticky;top:calc(var(--hdr) + 22px);
+}
+@media (max-width:900px){.summary-box{position:static}}
+.summary-line{
+  display:flex;justify-content:space-between;gap:16px;
+  font-size:12.5px;letter-spacing:.06em;
+  padding:13px 0;border-bottom:1px solid var(--line);
+  color:var(--muted);
+}
+.summary-line:last-of-type{border-bottom:0}
+.summary-total{
+  display:flex;justify-content:space-between;
+  font-size:14px;letter-spacing:.12em;text-transform:uppercase;
+  padding-top:20px;margin-top:10px;
+  border-top:1px solid var(--line-2);
+  color:var(--fg);
+}
+
+.info-page{
+  max-width:820px;
+  padding:clamp(48px,7vw,92px) 0 clamp(72px,9vw,132px);
+}
+.info-page h2{
+  font-size:11px;letter-spacing:.26em;text-transform:uppercase;
+  margin:46px 0 16px;font-weight:500;color:var(--fg);
+}
+.info-page p,.info-page li{
+  color:var(--muted);font-size:14px;line-height:1.95;
+}
+.info-page ul{display:flex;flex-direction:column;gap:8px}
+.info-page ul li{padding-left:18px;position:relative}
+.info-page ul li::before{
+  content:'';position:absolute;left:0;top:13px;
+  width:6px;height:1px;background:currentColor;
+}
+
+/* ==========================================================================
+   404 — now matches the light theme
+   ========================================================================== */
+.notfound{
+  min-height:calc(100vh - var(--hdr));
+  margin-top:var(--hdr);
+  background:var(--bg);
+  color:var(--fg);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  padding:clamp(60px,9vw,140px) 0;
+}
+.notfound::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(10,10,10,.04) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(10,10,10,0) 60%, rgba(10,10,10,.03) 100%);
+  pointer-events:none;
+}
+.notfound-inner{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  gap:24px;
+  max-width:720px;
+  width:100%;
+}
+.notfound-brand{
+  font-size:11px;letter-spacing:.44em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:6px;
+  animation:heroUp 1s var(--ease-out) both;
+}
+.notfound-code{
+  font-size:clamp(120px,22vw,260px);
+  line-height:.85;font-weight:300;
+  letter-spacing:-.03em;
+  background:linear-gradient(180deg, var(--fg) 0%, var(--dim) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:heroUp 1s var(--ease-out) .08s both;
+  position:relative;
+}
+.notfound-code::after{
+  content:'';display:block;
+  height:1px;width:min(320px,50%);
+  background:var(--line-2);margin:32px auto 0;
+}
+.notfound-title{
+  font-size:clamp(20px,3.2vw,34px);
+  letter-spacing:.08em;text-transform:uppercase;font-weight:400;
+  color:var(--fg);
+  animation:heroUp 1s var(--ease-out) .16s both;
+}
+.notfound-text{
+  max-width:46ch;color:var(--muted);font-size:14px;line-height:1.9;
+  animation:heroUp 1s var(--ease-out) .22s both;
+}
+.notfound-cta{
+  display:flex;gap:12px;flex-wrap:wrap;justify-content:center;
+  margin-top:14px;
+  animation:heroUp 1s var(--ease-out) .3s both;
+}
+.notfound-cta .btn{min-width:200px}
+
+/* ==========================================================================
+   TOAST
+   ========================================================================== */
+.toast{
+  position:fixed;left:clamp(16px,3vw,34px);bottom:clamp(16px,3vw,34px);z-index:200;
+  background:var(--d-bg-2);color:var(--d-fg);
+  border:1px solid var(--d-line-2);
+  padding:14px 22px;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  display:flex;align-items:center;gap:12px;
+  max-width:calc(100vw - 32px);
+  opacity:0;transform:translateY(14px);
+  transition:opacity var(--t) var(--ease-out),transform var(--t) var(--ease-out);
+  pointer-events:none;
+}
+.toast.is-open{opacity:1;transform:none}
+.toast .dot-ok{
+  width:6px;height:6px;border-radius:50%;
+  background:#8fbf8f;flex:0 0 auto;
+}
+
+.boot{
+  position:fixed;inset:0;display:grid;place-items:center;
+  background:var(--bg);color:var(--muted);
+  font-size:11px;letter-spacing:.36em;text-transform:uppercase;
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .reveal{opacity:1 !important;transform:none !important}
+  .hero-media img{animation:none !important}
+  .notfound-code,.notfound-brand,.notfound-title,.notfound-text,.notfound-cta{animation:none !important}
+  .page-enter,.cart-line,.field-error,.empty-state,.cart-count{animation:none !important}
+}
+</style>
+</head>
+<body>
+<div id="root"><div class="boot">NOIRÉ</div></div>
+
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+
+<script type="text/babel" data-presets="react">
+const { useState, useEffect, useMemo, useRef, useContext, createContext, useCallback } = React;
+
+/* IMAGE HELPERS */
+const U = (id, w = 1200) =>
+  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
+
+function placeholder(label) {
+  const safe = String(label || 'NOIRÉ')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .toUpperCase().slice(0, 30);
+  const svg =
+`<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#e9e4d8"/><stop offset="1" stop-color="#d6cfbe"/></linearGradient></defs>
+<rect width="900" height="1200" fill="url(#g)"/>
+<rect x="32" y="32" width="836" height="1136" fill="none" stroke="#c2bbaa"/>
+<text x="450" y="580" fill="#9a9386" font-family="Helvetica,Arial,sans-serif" font-size="48" letter-spacing="16" text-anchor="middle">NOIRÉ</text>
+<text x="450" y="642" fill="#8a8378" font-family="Helvetica,Arial,sans-serif" font-size="17" letter-spacing="7" text-anchor="middle">${safe}</text>
+</svg>`;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+
+function SmartImage({ src, alt = '', ...rest }) {
+  const [failed, setFailed] = useState(false);
+  return (
+    <img
+      src={failed ? placeholder(alt) : src}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+      onError={() => setFailed(true)}
+      {...rest}
+    />
+  );
+}
+
+/* ICONS */
+const ICON_PATHS = {
+  search: <><circle cx="11" cy="11" r="7" /><path d="m20.5 20.5-4-4" /></>,
+  bag: <><path d="M5.5 8h13l1 12.5h-15L5.5 8Z" /><path d="M9 8V6.2A3 3 0 0 1 12 3.2a3 3 0 0 1 3 3V8" /></>,
+  heart: <path d="M12 20.5s-7.4-4.6-7.4-9.6A4.1 4.1 0 0 1 12 8.2a4.1 4.1 0 0 1 7.4 2.7c0 5-7.4 9.6-7.4 9.6Z" />,
+  menu: <><path d="M3 7.5h18" /><path d="M3 16.5h18" /></>,
+  close: <><path d="M5.5 5.5 18.5 18.5" /><path d="M18.5 5.5 5.5 18.5" /></>,
+  plus: <><path d="M12 5.5v13" /><path d="M5.5 12h13" /></>,
+  minus: <path d="M5.5 12h13" />,
+  check: <path d="m4.5 12.5 5 5 10-11" />,
+  sliders: <><path d="M3 7h18" /><path d="M3 17h18" /><circle cx="9" cy="7" r="2" /><circle cx="15" cy="17" r="2" /></>,
+};
+
+function Icon({ name, size = 18, stroke = 1.4, filled = false, ...rest }) {
+  return (
+    <svg
+      width={size} height={size} viewBox="0 0 24 24" fill={filled ? 'currentColor' : 'none'}
+      stroke="currentColor" strokeWidth={stroke} strokeLinecap="round" strokeLinejoin="round"
+      aria-hidden="true" focusable="false" {...rest}
+    >
+      {ICON_PATHS[name]}
+    </svg>
+  );
+}
+
+/* REVEAL */
+function Reveal({ children, delay = 0, className = '', style, ...rest }) {
+  const ref = useRef(null);
+  const [shown, setShown] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setShown(true); return; }
+    const io = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setShown(true); io.disconnect(); } },
+      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`reveal ${shown ? 'is-in' : ''} ${className}`}
+      style={{ transitionDelay: `${delay}ms`, ...style }}
+      {...rest}
+    >
+      {children}
+    </div>
+  );
+}
+
+/* ROUTER */
+function useRoute() {
+  const read = () => window.location.hash.replace(/^#/, '') || '/';
+  const [path, setPath] = useState(read);
+  useEffect(() => {
+    const onChange = () => setPath(read());
+    window.addEventListener('hashchange', onChange);
+    return () => window.removeEventListener('hashchange', onChange);
+  }, []);
+  return path;
+}
+
+function navigate(to) {
+  const target = to.startsWith('#') ? to : '#' + to;
+  if (window.location.hash === target) {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    return;
+  }
+  window.location.hash = target;
+}
+
+/* DATA */
+const ALL_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+const CATEGORIES = ['All', 'T-Shirts', 'Hoodies', 'Jackets', 'Pants', 'Accessories'];
+const COLOR_PALETTE = [
+  { name: 'Black', hex: '#151515' },
+  { name: 'White', hex: '#f2f2f0' },
+  { name: 'Grey', hex: '#8c8c8c' },
+  { name: 'Beige', hex: '#cfc2a8' },
+  { name: 'Brown', hex: '#5a4433' },
+];
+const hexOf = (n) => (COLOR_PALETTE.find((c) => c.name === n) || {}).hex || '#888';
+const PRICE_MIN = 0;
+const PRICE_MAX = 600;
+
+const CURRENCIES = {
+  USD: { code: 'USD', symbol: '$', rate: 1.08 },
+  UAH: { code: 'UAH', symbol: '₴', rate: 45 },
+};
+const DEFAULT_CURRENCY = 'USD';
+
+const PRODUCTS = [
+  {
+    id: 'oversized-heavyweight-hoodie',
+    name: 'Oversized Heavyweight Hoodie',
+    category: 'Hoodies',
+    price: 120,
+    isNew: true,
+    colors: ['Black', 'Grey', 'Beige'],
+    sizes: ALL_SIZES,
+    images: [U('1620799140408-edc6dcb6d633'), U('1556821840-3a63f95609a7')],
+    description:
+      'A premium heavyweight hoodie designed for everyday wear. Crafted with a relaxed silhouette, clean details and a timeless aesthetic.',
+    details: [
+      '480 GSM brushed organic cotton fleece',
+      'Dropped shoulder, oversized silhouette',
+      'Double-stitched seams and ribbed cuffs',
+      'Tonal embroidered NOIRÉ signature',
+      'Made in Portugal',
+    ],
+    fit: 'Oversized. Model is 187 cm and wears size L. For a closer fit, size down.',
+  },
+  {
+    id: 'structured-bomber-jacket',
+    name: 'Structured Bomber Jacket',
+    category: 'Jackets',
+    price: 240,
+    isNew: true,
+    colors: ['Black', 'Brown'],
+    sizes: ALL_SIZES,
+    images: [U('1551028719-00167b16eac5'), U('1591047139829-d91aecb6caea')],
+    description:
+      'A sharply structured bomber with a matte technical finish. Built to hold its shape, season after season.',
+    details: [
+      'Water-repellent matte technical shell',
+      'Fully lined, structured shoulder',
+      'Two-way metal zip with matte finish',
+      'Ribbed hem and cuff detailing',
+      'Made in Italy',
+    ],
+    fit: 'Regular fit. Model is 185 cm and wears size M.',
+  },
+  {
+    id: 'relaxed-fit-cargo-pants',
+    name: 'Relaxed Fit Cargo Pants',
+    category: 'Pants',
+    price: 150,
+    isNew: false,
+    colors: ['Black', 'Beige', 'Grey'],
+    sizes: ALL_SIZES,
+    images: [U('1473966968600-fa801b869a1a'), U('1544022613-e87ca75a784a')],
+    description:
+      'Utility trousers reworked with a clean, relaxed line. Reinforced seams and a subtle taper keep the shape sharp.',
+    details: [
+      'Compact cotton twill, garment dyed',
+      'Relaxed leg with subtle taper',
+      'Reinforced bar-tack stress points',
+      'Hidden zip side pockets',
+      'Made in Portugal',
+    ],
+    fit: 'Relaxed. Model is 188 cm and wears size M.',
+  },
+  {
+    id: 'essential-cotton-t-shirt',
+    name: 'Essential Cotton T-Shirt',
+    category: 'T-Shirts',
+    price: 65,
+    isNew: true,
+    colors: ['White', 'Black', 'Grey'],
+    sizes: ALL_SIZES,
+    images: [U('1521572163474-6864f9cf17ab'), U('1576566588028-4147f3842f27')],
+    description:
+      'The foundation piece. Heavyweight cotton with a clean neckline and a straight body that keeps its shape.',
+    details: [
+      '260 GSM compact organic cotton jersey',
+      'Ribbed crew neckline with twin needle finish',
+      'Pre-shrunk and garment washed',
+      'Tonal woven label at hem',
+      'Made in Portugal',
+    ],
+    fit: 'Regular fit. Model is 184 cm and wears size M.',
+  },
+  {
+    id: 'technical-shell-jacket',
+    name: 'Technical Shell Jacket',
+    category: 'Jackets',
+    price: 380,
+    isNew: false,
+    colors: ['Black'],
+    sizes: ALL_SIZES,
+    images: [U('1507003211169-0a1dd7228f2d'), U('1500648767791-00dcc994a43e')],
+    description:
+      'A fully seam-sealed shell engineered for the city. Quietly technical, entirely understated.',
+    details: [
+      '3-layer waterproof membrane, 20k/20k',
+      'Fully taped seams and storm flap',
+      'Laser-cut ventilation at back yoke',
+      'Adjustable storm hood',
+      'Made in Japan',
+    ],
+    fit: 'Regular fit with room for layering. Model wears size M.',
+  },
+  {
+    id: 'boxy-zip-hoodie',
+    name: 'Boxy Zip Hoodie',
+    category: 'Hoodies',
+    price: 165,
+    isNew: false,
+    colors: ['Grey', 'Black'],
+    sizes: ALL_SIZES,
+    images: [U('1529139574466-a303027c1d8b'), U('1479064555552-3ef4979f8908')],
+    description:
+      'A boxy cut full-zip hoodie in dense loopback cotton. Clean lines, no visible branding except the mark.',
+    details: [
+      '400 GSM loopback cotton',
+      'Full-length matte metal zip',
+      'Boxy body, cropped hem',
+      'Tonal embroidered mark at chest',
+      'Made in Portugal',
+    ],
+    fit: 'Boxy. Model is 186 cm and wears size L.',
+  },
+  {
+    id: 'wool-overcoat',
+    name: 'Wool Overcoat',
+    category: 'Jackets',
+    price: 520,
+    isNew: false,
+    colors: ['Black', 'Brown'],
+    sizes: ALL_SIZES,
+    images: [U('1539109136881-3be0616acf4b'), U('1483985988355-763728e1935b')],
+    description:
+      'A long, unstructured overcoat in Italian wool. Designed to sit over everything, quietly.',
+    details: [
+      'Double-faced Italian virgin wool',
+      'Unstructured shoulder, no lining',
+      'Concealed placket with horn buttons',
+      'Deep welt pockets',
+      'Made in Italy',
+    ],
+    fit: 'Oversized. Model is 187 cm and wears size M.',
+  },
+  {
+    id: 'pleated-wide-trousers',
+    name: 'Pleated Wide Trousers',
+    category: 'Pants',
+    price: 175,
+    isNew: false,
+    colors: ['Black', 'Grey'],
+    sizes: ALL_SIZES,
+    images: [U('1496747611176-843222e1e57c'), U('1515886657613-9f3515b0c78f')],
+    description:
+      'Single-pleat trousers cut wide through the leg, in a dry, matte wool blend that drapes without weight.',
+    details: [
+      'Wool blend with dry matte hand',
+      'Single forward pleat',
+      'Wide straight leg',
+      'Hook-and-bar closure, clean waistband',
+      'Made in Portugal',
+    ],
+    fit: 'Wide. Model is 184 cm and wears size M.',
+  },
+  {
+    id: 'heavyweight-long-sleeve',
+    name: 'Heavyweight Long Sleeve',
+    category: 'T-Shirts',
+    price: 85,
+    isNew: false,
+    colors: ['White', 'Black'],
+    sizes: ALL_SIZES,
+    images: [U('1618354691373-d851c5c3a990'), U('1583743814966-8936f5b7be1a')],
+    description:
+      'A long sleeve in the same heavyweight cotton as the Essential tee. Cut straight, finished clean.',
+    details: [
+      '260 GSM compact organic cotton jersey',
+      'Straight body, ribbed cuffs',
+      'Twin needle hem and sleeve finish',
+      'Tonal woven label at hem',
+      'Made in Portugal',
+    ],
+    fit: 'Regular fit. Model is 184 cm and wears size M.',
+  },
+  {
+    id: 'leather-card-holder',
+    name: 'Leather Card Holder',
+    category: 'Accessories',
+    price: 90,
+    isNew: false,
+    colors: ['Black', 'Brown'],
+    sizes: [],
+    images: [U('1627123424574-724758594e93'), U('1553062407-98eeb64c6a62')],
+    description:
+      'A slim card holder in vegetable-tanned leather. Four slots, no excess, ages beautifully.',
+    details: [
+      'Vegetable-tanned full grain leather',
+      'Four card slots, central note sleeve',
+      'Hand-painted edges',
+      'Debossed NOIRÉ mark',
+      'Made in Italy',
+    ],
+    fit: 'One size. 10.5 × 7.5 cm.',
+  },
+  {
+    id: 'ribbed-beanie',
+    name: 'Ribbed Beanie',
+    category: 'Accessories',
+    price: 55,
+    isNew: true,
+    colors: ['Black', 'Grey', 'Beige'],
+    sizes: [],
+    images: [U('1576871337622-98d48d1cf531'), U('1521369909029-2afed882baee')],
+    description:
+      'A fine-ribbed beanie in extra-fine merino. Soft, warm, and cut to a clean, unfussy shape.',
+    details: [
+      'Extra-fine merino wool',
+      'Fine 2×2 rib knit',
+      'Turned hem with woven label',
+      'Made in Scotland',
+    ],
+    fit: 'One size, unisex.',
+  },
+  {
+    id: 'canvas-tote-bag',
+    name: 'Canvas Tote Bag',
+    category: 'Accessories',
+    price: 110,
+    isNew: false,
+    colors: ['Beige', 'Black'],
+    sizes: [],
+    images: [U('1544816155-12df9643f363'), U('1591561954557-26941169b49e')],
+    description:
+      'A heavy canvas tote with reinforced handles and an internal pocket. Built to be used hard.',
+    details: [
+      '18 oz heavyweight cotton canvas',
+      'Reinforced webbing handles',
+      'Internal slip pocket',
+      'Screen-printed NOIRÉ mark',
+      'Made in Portugal',
+    ],
+    fit: 'One size. 42 × 38 × 12 cm.',
+  },
+  {
+    id: 'faded-logo-tee',
+    name: 'Faded Logo Tee',
+    category: 'T-Shirts',
+    price: 70,
+    isNew: false,
+    colors: ['Grey', 'Black'],
+    sizes: ALL_SIZES,
+    images: [U('1503341504253-dff4815485f1'), U('1445205170230-053b83016050')],
+    description:
+      'A washed cotton tee with a sun-faded screen print. Each piece fades a little differently.',
+    details: [
+      '240 GSM cotton jersey, garment washed',
+      'Hand-pulled faded screen print',
+      'Relaxed body, straight hem',
+      'Made in Portugal',
+    ],
+    fit: 'Relaxed. Model is 186 cm and wears size M.',
+  },
+  {
+    id: 'selvedge-denim-jacket',
+    name: 'Selvedge Denim Jacket',
+    category: 'Jackets',
+    price: 290,
+    isNew: true,
+    colors: ['Black'],
+    sizes: ALL_SIZES,
+    images: [U('1608063615781-e2ef8c73d114'), U('1542272604-787c3835535d')],
+    description:
+      'A type II jacket reworked in 14 oz black selvedge denim. Rigid at first, personal over time.',
+    details: [
+      '14 oz Japanese selvedge denim',
+      'Type II construction, boxy body',
+      'Copper rivets, matte black hardware',
+      'Chain-stitched hem',
+      'Made in Japan',
+    ],
+    fit: 'Boxy. Model is 185 cm and wears size M.',
+  },
+];
+
+PRODUCTS.forEach((p, i) => { p._i = i; });
+const getProduct = (id) => PRODUCTS.find((p) => p.id === id);
+
+/* STORAGE + SANITIZATION */
+function readLS(key, fallback) {
+  try {
+    const raw = window.localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch (e) { return fallback; }
+}
+function writeLS(key, value) {
+  try { window.localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
+}
+
+function normalizeCart(raw) {
+  if (!Array.isArray(raw)) return [];
+  const seen = new Set();
+  return raw.reduce((acc, it) => {
+    if (!it || typeof it !== 'object') return acc;
+    const rawPrice = it.priceEUR != null ? it.priceEUR : it.price;
+    const priceEUR = Number(rawPrice);
+    const qty = Number(it.qty);
+    if (!Number.isFinite(priceEUR) || priceEUR <= 0) return acc;
+    if (!Number.isFinite(qty) || qty <= 0) return acc;
+    const id = it.id != null ? String(it.id) : null;
+    const size = it.size || null;
+    const color = it.color || null;
+    const key = String(it.key || `${id || 'x'}|${size || '-'}|${color || '-'}`);
+    if (seen.has(key)) return acc;
+    seen.add(key);
+    acc.push({
+      key, id,
+      name: String(it.name || 'Item'),
+      priceEUR,
+      image: it.image || '',
+      size, color,
+      qty: Math.min(99, Math.max(1, Math.round(qty))),
+    });
+    return acc;
+  }, []);
+}
+
+/* SHOP CONTEXT */
+const ShopContext = createContext(null);
+const useShop = () => useContext(ShopContext);
+
+function ShopProvider({ children }) {
+  const [cart, setCart] = useState(() => normalizeCart(readLS('noire:cart', [])));
+  const [wishlist, setWishlist] = useState(() => {
+    const raw = readLS('noire:wishlist', []);
+    return Array.isArray(raw) ? raw.filter((x) => typeof x === 'string') : [];
+  });
+  const [currency, setCurrency] = useState(() => {
+    const stored = readLS('noire:currency', null);
+    return stored && CURRENCIES[stored] ? stored : DEFAULT_CURRENCY;
+  });
+  const [cartOpen, setCartOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [toast, setToast] = useState(null);
+  const toastTimer = useRef(null);
+
+  useEffect(() => { writeLS('noire:cart', cart); }, [cart]);
+  useEffect(() => { writeLS('noire:wishlist', wishlist); }, [wishlist]);
+  useEffect(() => { writeLS('noire:currency', currency); }, [currency]);
+
+  const anyOpen = cartOpen || searchOpen || menuOpen;
+  useEffect(() => {
+    document.body.classList.toggle('no-scroll', anyOpen);
+    return () => document.body.classList.remove('no-scroll');
+  }, [anyOpen]);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'Escape') { setCartOpen(false); setSearchOpen(false); setMenuOpen(false); }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+  const showToast = useCallback((message) => {
+    setToast(message);
+    window.clearTimeout(toastTimer.current);
+    toastTimer.current = window.setTimeout(() => setToast(null), 2800);
+  }, []);
+
+  const addToCart = useCallback((product, { size = null, color = null, qty = 1 } = {}) => {
+    const priceEUR = Number(product.price);
+    if (!Number.isFinite(priceEUR) || priceEUR <= 0) return;
+    const key = `${product.id}|${size || '-'}|${color || '-'}`;
+    const safeQty = Math.max(1, Math.min(99, Math.round(Number(qty) || 1)));
+    setCart((prev) => {
+      const idx = prev.findIndex((it) => it.key === key);
+      if (idx > -1) {
+        const copy = prev.slice();
+        copy[idx] = { ...copy[idx], qty: Math.min(99, copy[idx].qty + safeQty) };
+        return copy;
+      }
+      return [...prev, {
+        key,
+        id: product.id,
+        name: product.name,
+        priceEUR,
+        image: product.images[0],
+        size, color, qty: safeQty,
+      }];
+    });
+  }, []);
+
+  const updateQty = useCallback((key, delta) => {
+    setCart((prev) => prev.flatMap((it) => {
+      if (it.key !== key) return [it];
+      const next = it.qty + delta;
+      if (next <= 0) return [];
+      return [{ ...it, qty: Math.min(99, next) }];
+    }));
+  }, []);
+
+  const removeItem = useCallback((key) => {
+    setCart((prev) => prev.filter((it) => it.key !== key));
+  }, []);
+
+  const clearCart = useCallback(() => setCart([]), []);
+
+  const toggleWishlist = useCallback((id) => {
+    setWishlist((prev) => prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]);
+  }, []);
+  const isWished = useCallback((id) => wishlist.includes(id), [wishlist]);
+
+  const formatPrice = useCallback((eurAmount) => {
+    const c = CURRENCIES[currency] || CURRENCIES[DEFAULT_CURRENCY];
+    const n = Number(eurAmount);
+    const safe = Number.isFinite(n) ? n : 0;
+    const converted = Math.round(safe * c.rate);
+    return c.symbol + converted.toLocaleString('en-US');
+  }, [currency]);
+
+  const cartCount = cart.reduce((s, it) => s + it.qty, 0);
+  const subtotalEUR = cart.reduce((s, it) => {
+    const p = Number(it.priceEUR);
+    return s + (Number.isFinite(p) ? p : 0) * it.qty;
+  }, 0);
+
+  const value = {
+    cart, cartOpen, setCartOpen,
+    searchOpen, setSearchOpen,
+    menuOpen, setMenuOpen,
+    wishlist, toggleWishlist, isWished,
+    addToCart, updateQty, removeItem, clearCart,
+    cartCount, subtotalEUR,
+    currency, setCurrency,
+    formatPrice,
+    toast, showToast,
+  };
+
+  return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
+}
+
+/* HEADER */
+const NAV_LINKS = [
+  { label: 'NEW ARRIVALS', to: '/new-arrivals' },
+  { label: 'CLOTHING', to: '/clothing' },
+  { label: 'COLLECTIONS', to: '/collections' },
+  { label: 'ABOUT', to: '/about' },
+];
+
+const HERO_DARK_ROUTES = new Set(['']);
+
+function CurrencyToggle() {
+  const { currency, setCurrency } = useShop();
+  return (
+    <div className="currency-toggle" role="group" aria-label="Currency">
+      {Object.keys(CURRENCIES).map((code) => (
+        <button
+          key={code}
+          className={currency === code ? 'is-active' : ''}
+          onClick={() => setCurrency(code)}
+          aria-pressed={currency === code}
+        >
+          {code}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function Header({ path }) {
+  const { cartCount, wishlist, setCartOpen, setSearchOpen, menuOpen, setMenuOpen } = useShop();
+  const [scrolled, setScrolled] = useState(false);
+
+  const seg = path.split('/').filter(Boolean)[0] || '';
+  const solid = scrolled;
+  const overHero = HERO_DARK_ROUTES.has(seg) && !solid;
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <header className={`header ${solid ? 'is-solid' : ''} ${overHero ? 'on-hero' : ''}`}>
+      <div className="wrap header-inner">
+        <button className="logo" onClick={() => navigate('/')} aria-label="NOIRÉ — home">
+          NOIRÉ
+        </button>
+
+        <nav className="main-nav" aria-label="Main">
+          {NAV_LINKS.map((l) => {
+            const active = path === l.to || path.startsWith(l.to + '/');
+            return (
+              <a
+                key={l.to}
+                href={'#' + l.to}
+                className={active ? 'is-active' : ''}
+                onClick={(e) => { e.preventDefault(); navigate(l.to); }}
+              >
+                {l.label}
+              </a>
+            );
+          })}
+        </nav>
+
+        <div className="header-actions">
+          <CurrencyToggle />
+          <button className="icon-btn" onClick={() => setSearchOpen(true)} aria-label="Search">
+            <Icon name="search" />
+          </button>
+          <button className="icon-btn" onClick={() => navigate('/wishlist')} aria-label="Wishlist">
+            <Icon name="heart" filled={wishlist.length > 0} />
+            {wishlist.length > 0 && <span className="cart-count">{wishlist.length}</span>}
+          </button>
+          <button className="icon-btn" onClick={() => setCartOpen(true)} aria-label="Shopping bag">
+            <Icon name="bag" />
+            {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
+          </button>
+          <button
+            className="icon-btn menu-btn"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Menu"
+            aria-expanded={menuOpen}
+          >
+            <Icon name={menuOpen ? 'close' : 'menu'} />
+          </button>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+/* MOBILE MENU */
+function MobileMenu() {
+  const { menuOpen, setMenuOpen, currency, setCurrency } = useShop();
+  const links = [
+    ...NAV_LINKS,
+    { label: 'WISHLIST', to: '/wishlist' },
+  ];
+
+  return (
+    <div className={`mobile-menu ${menuOpen ? 'is-open' : ''}`} aria-hidden={!menuOpen}>
+      <button
+        className="mm-close"
+        onClick={() => setMenuOpen(false)}
+        aria-label="Close menu"
+        tabIndex={menuOpen ? 0 : -1}
+      >
+        <Icon name="close" size={22} />
+      </button>
+
+      <nav className="mm-nav" aria-label="Mobile">
+        {links.map((l, i) => (
+          <button
+            key={l.to}
+            className="mm-link"
+            style={{ transitionDelay: menuOpen ? `${100 + i * 55}ms` : '0ms' }}
+            onClick={() => { setMenuOpen(false); navigate(l.to); }}
+            tabIndex={menuOpen ? 0 : -1}
+          >
+            {l.label}
+          </button>
+        ))}
+      </nav>
+
+      <div className="mm-foot">
+        <div className="currency-toggle" style={{ margin: 0, borderColor: 'var(--d-line-2)', color: 'var(--d-fg)' }}>
+          {Object.keys(CURRENCIES).map((code) => (
+            <button
+              key={code}
+              className={currency === code ? 'is-active' : ''}
+              onClick={() => setCurrency(code)}
+              tabIndex={menuOpen ? 0 : -1}
+            >
+              {code}
+            </button>
+          ))}
+        </div>
+        <button onClick={() => { setMenuOpen(false); navigate('/contact'); }} tabIndex={menuOpen ? 0 : -1}>CONTACT</button>
+        <button onClick={() => { setMenuOpen(false); navigate('/shipping'); }} tabIndex={menuOpen ? 0 : -1}>SHIPPING</button>
+        <button onClick={() => { setMenuOpen(false); navigate('/size-guide'); }} tabIndex={menuOpen ? 0 : -1}>SIZE GUIDE</button>
+      </div>
+    </div>
+  );
+}
+
+/* HERO */
+function Hero() {
+  return (
+    <section className="hero">
+      <div className="hero-media">
+        <SmartImage
+          src={U('1489987707025-afc232f7ea0f', 2200)}
+          alt="NOIRÉ campaign — model in black outerwear"
+        />
+      </div>
+      <div className="hero-overlay" />
+
+      <div className="wrap hero-content">
+        <p className="hero-eyebrow">NOIRÉ — EST. 2026</p>
+        <h1 className="hero-title">
+          <span className="hero-brand">NOIRÉ</span>
+          <span className="hero-sub">BEYOND THE ORDINARY.</span>
+        </h1>
+        <p className="hero-caption">A NEW PERSPECTIVE ON MODERN STREETWEAR.</p>
+        <div className="hero-cta">
+          <button className="btn btn-on-dark btn-solid" onClick={() => navigate('/clothing')}>
+            <span>SHOP THE COLLECTION</span>
+          </button>
+        </div>
+      </div>
+
+      <div className="hero-scroll" aria-hidden="true">
+        <span>SCROLL TO EXPLORE</span>
+        <span className="hero-scroll-line" />
+      </div>
+    </section>
+  );
+}
+
+function SectionHead({ title, subtitle, linkLabel, linkTo, onLink }) {
+  return (
+    <div className="sec-head">
+      <div className="sec-head-left">
+        <h2 className="h-xl">{title}</h2>
+        {subtitle && <span className="eyebrow">{subtitle}</span>}
+      </div>
+      {linkLabel && (
+        <button className="u-link" onClick={onLink || (() => navigate(linkTo))}>
+          {linkLabel}
+        </button>
+      )}
+    </div>
+  );
+}
+
+/* PRODUCT CARD */
+function ProductCard({ product, onQuickAdd, onOpen }) {
+  const { isWished, toggleWishlist, formatPrice } = useShop();
+  const wished = isWished(product.id);
+  const second = product.images[1];
+
+  return (
+    <article className="card">
+      <div
+        className="card-media"
+        role="button"
+        tabIndex={0}
+        onClick={() => onOpen(product)}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onOpen(product); } }}
+        aria-label={`View ${product.name}`}
+      >
+        <SmartImage className="img-a" src={product.images[0]} alt={product.name} />
+        {second && <SmartImage className="img-b" src={second} alt={`${product.name} — alternate view`} />}
+
+        {product.isNew && <span className="card-badge">NEW</span>}
+
+        <button
+          className={`card-wish ${wished ? 'is-active' : ''}`}
+          onClick={(e) => { e.stopPropagation(); toggleWishlist(product.id); }}
+          aria-label={wished ? 'Remove from wishlist' : 'Add to wishlist'}
+          aria-pressed={wished}
+        >
+          <Icon name="heart" size={15} filled={wished} />
+        </button>
+
+        <button
+          className="quick-add"
+          onClick={(e) => { e.stopPropagation(); onQuickAdd(product); }}
+        >
+          QUICK ADD
+        </button>
+      </div>
+
+      <div className="card-info">
+        <span className="card-name">{product.name}</span>
+        <span className="card-price">{formatPrice(product.price)}</span>
+        <div className="card-colors" aria-label="Available colours">
+          {product.colors.map((c) => (
+            <span
+              key={c}
+              className="dot"
+              style={{ background: hexOf(c) }}
+              title={c}
+            />
+          ))}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function ProductGrid({ products, onOpen }) {
+  const { addToCart, setCartOpen, showToast } = useShop();
+
+  const handleQuickAdd = (product) => {
+    if (product.sizes.length > 0) {
+      onOpen(product);
+      return;
+    }
+    addToCart(product, { color: product.colors[0] });
+    showToast(`${product.name} added to bag`);
+    setCartOpen(true);
+  };
+
+  return (
+    <div className="grid">
+      {products.map((p, i) => (
+        <Reveal key={p.id} delay={Math.min(i, 4) * 70}>
+          <ProductCard product={p} onQuickAdd={handleQuickAdd} onOpen={onOpen} />
+        </Reveal>
+      ))}
+    </div>
+  );
+}
+
+function EditorialBanner() {
+  return (
+    <section className="editorial">
+      <SmartImage src={U('1483985988355-763728e1935b', 2200)} alt="NOIRÉ collection — urban setting" />
+      <div className="editorial-overlay" />
+      <div className="wrap editorial-content">
+        <h2 className="editorial-title">THE NEW UNIFORM</h2>
+        <p className="editorial-sub">
+          DESIGNED FOR EVERYDAY LIFE.<br />
+          BUILT TO STAND APART.
+        </p>
+        <button className="btn btn-on-dark btn-solid" onClick={() => navigate('/collections')}>
+          <span>EXPLORE COLLECTION</span>
+        </button>
+      </div>
+    </section>
+  );
+}
+
+function AboutSection() {
+  return (
+    <section className="section">
+      <div className="wrap">
+        <div className="about-grid">
+          <Reveal className="about-media">
+            <SmartImage src={U('1490481651871-ab68de25d43d', 1400)} alt="NOIRÉ fabric and detail study" />
+          </Reveal>
+
+          <Reveal delay={120} className="about-text">
+            <p className="eyebrow" style={{ marginBottom: 20 }}>ABOUT NOIRÉ</p>
+            <h2 className="h-xl" style={{ marginBottom: 28 }}>LESS, BUT BETTER.</h2>
+            <p>
+              NOIRÉ is a contemporary clothing brand built around simplicity, quality and individuality.
+              We believe that great design doesn't need to be loud. Every piece is created to become
+              a natural part of your everyday wardrobe.
+            </p>
+          </Reveal>
+        </div>
+
+        <div className="principles">
+          {[
+            ['01', 'QUALITY OVER QUANTITY'],
+            ['02', 'TIMELESS DESIGN'],
+            ['03', 'MADE FOR EVERYDAY LIFE'],
+          ].map(([num, title], i) => (
+            <Reveal key={num} delay={i * 90} className="principle">
+              <span className="num">{num}</span>
+              <span className="ttl">{title}</span>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HomePage() {
+  const newArrivals = useMemo(
+    () => PRODUCTS.filter((p) => p.isNew).slice(0, 4),
+    []
+  );
+  const openProduct = useCallback((p) => navigate(`/product/${p.id}`), []);
+
+  return (
+    <div className="page-enter">
+      <Hero />
+
+      <section className="section">
+        <div className="wrap">
+          <SectionHead
+            title="NEW ARRIVALS"
+            subtitle="DISCOVER THE LATEST PIECES"
+            linkLabel="VIEW ALL"
+            linkTo="/new-arrivals"
+          />
+          <ProductGrid products={newArrivals} onOpen={openProduct} />
+        </div>
+      </section>
+
+      <EditorialBanner />
+      <AboutSection />
+    </div>
+  );
+}
+
+/* FILTERS */
+function FilterCheckbox({ active, label, onClick }) {
+  return (
+    <button className={`filter-opt ${active ? 'is-active' : ''}`} onClick={onClick} aria-pressed={active}>
+      <span className="box">{active && <Icon name="check" size={9} stroke={2} />}</span>
+      {label}
+    </button>
+  );
+}
+
+function FilterContent({
+  category, setCategory,
+  sizes, toggleSize,
+  colors, toggleColor,
+  priceMin, priceMax, setPriceMin, setPriceMax,
+  onClear, resultCount, onClose,
+}) {
+  const { formatPrice } = useShop();
+
+  return (
+    <>
+      {onClose && (
+        <div className="filters-head">
+          <span className="h-sm">FILTERS</span>
+          <button className="icon-btn" onClick={onClose} aria-label="Close filters">
+            <Icon name="close" size={20} />
+          </button>
+        </div>
+      )}
+
+      <div className="filter-group">
+        <div className="filter-title">CATEGORY</div>
+        <div className="filter-list">
+          {CATEGORIES.map((c) => (
+            <FilterCheckbox
+              key={c}
+              label={c}
+              active={category === c}
+              onClick={() => setCategory(c)}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="filter-group">
+        <div className="filter-title">SIZE</div>
+        <div className="size-grid">
+          {ALL_SIZES.map((s) => (
+            <button
+              key={s}
+              className={`size-chip ${sizes.includes(s) ? 'is-active' : ''}`}
+              onClick={() => toggleSize(s)}
+              aria-pressed={sizes.includes(s)}
+            >
+              {s}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="filter-group">
+        <div className="filter-title">COLOUR</div>
+        <div className="color-row">
+          {COLOR_PALETTE.map((c) => (
+            <button
+              key={c.name}
+              className={`color-swatch ${colors.includes(c.name) ? 'is-active' : ''}`}
+              style={{ background: c.hex }}
+              onClick={() => toggleColor(c.name)}
+              aria-label={c.name}
+              aria-pressed={colors.includes(c.name)}
+              title={c.name}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="filter-group">
+        <div className="filter-title">PRICE</div>
+        <div className="price-values">
+          <span>{formatPrice(priceMin)}</span>
+          <span>{formatPrice(priceMax)}</span>
+        </div>
+        <input
+          type="range"
+          min={PRICE_MIN}
+          max={PRICE_MAX}
+          step={5}
+          value={priceMin}
+          onChange={(e) => setPriceMin(Math.min(Number(e.target.value), priceMax - 5))}
+          aria-label="Minimum price"
+        />
+        <input
+          type="range"
+          min={PRICE_MIN}
+          max={PRICE_MAX}
+          step={5}
+          value={priceMax}
+          onChange={(e) => setPriceMax(Math.max(Number(e.target.value), priceMin + 5))}
+          aria-label="Maximum price"
+        />
+        <button className="clear-all" onClick={onClear}>CLEAR ALL</button>
+      </div>
+
+      {onClose && (
+        <div style={{ paddingTop: 22 }}>
+          <button className="btn btn-solid btn-block" onClick={onClose}>
+            <span>SHOW {resultCount} ITEMS</span>
+          </button>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* CATALOG */
+const SORT_OPTIONS = [
+  { value: 'featured', label: 'FEATURED' },
+  { value: 'newest', label: 'NEWEST' },
+  { value: 'price-asc', label: 'PRICE: LOW TO HIGH' },
+  { value: 'price-desc', label: 'PRICE: HIGH TO LOW' },
+];
+
+function CatalogPage({ onlyNew = false, presetCategory = null }) {
+  const [category, setCategory] = useState(presetCategory || 'All');
+  const [sizes, setSizes] = useState([]);
+  const [colors, setColors] = useState([]);
+  const [priceMin, setPriceMin] = useState(PRICE_MIN);
+  const [priceMax, setPriceMax] = useState(PRICE_MAX);
+  const [sort, setSort] = useState('featured');
+  const [mobileFilters, setMobileFilters] = useState(false);
+
+  useEffect(() => { setCategory(presetCategory || 'All'); }, [presetCategory]);
+
+  useEffect(() => {
+    document.body.classList.toggle('no-scroll', mobileFilters);
+    return () => document.body.classList.remove('no-scroll');
+  }, [mobileFilters]);
+
+  const toggleSize = (s) =>
+    setSizes((prev) => prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]);
+  const toggleColor = (c) =>
+    setColors((prev) => prev.includes(c) ? prev.filter((x) => x !== c) : [...prev, c]);
+
+  const clearAll = () => {
+    setCategory('All');
+    setSizes([]);
+    setColors([]);
+    setPriceMin(PRICE_MIN);
+    setPriceMax(PRICE_MAX);
+  };
+
+  const results = useMemo(() => {
+    let list = PRODUCTS.filter((p) => {
+      if (onlyNew && !p.isNew) return false;
+      if (category !== 'All' && p.category !== category) return false;
+      if (sizes.length > 0 && !sizes.some((s) => p.sizes.includes(s))) return false;
+      if (colors.length > 0 && !colors.some((c) => p.colors.includes(c))) return false;
+      if (p.price < priceMin || p.price > priceMax) return false;
+      return true;
+    });
+
+    switch (sort) {
+      case 'newest':
+        list = list.slice().sort((a, b) => b._i - a._i);
+        break;
+      case 'price-asc':
+        list = list.slice().sort((a, b) => a.price - b.price);
+        break;
+      case 'price-desc':
+        list = list.slice().sort((a, b) => b.price - a.price);
+        break;
+      default:
+        list = list.slice().sort((a, b) => a._i - b._i);
+    }
+    return list;
+  }, [onlyNew, category, sizes, colors, priceMin, priceMax, sort]);
+
+  const openProduct = useCallback((p) => navigate(`/product/${p.id}`), []);
+  const filtersActive = category !== 'All' || sizes.length > 0 || colors.length > 0 ||
+    priceMin !== PRICE_MIN || priceMax !== PRICE_MAX;
+
+  const filterProps = {
+    category, setCategory,
+    sizes, toggleSize,
+    colors, toggleColor,
+    priceMin, priceMax, setPriceMin, setPriceMax,
+    onClear: clearAll,
+    resultCount: results.length,
+  };
+
+  return (
+    <div className="page-enter">
+      <div className="page wrap">
+        <div className="page-head">
+          <p className="eyebrow" style={{ marginBottom: 18 }}>
+            {onlyNew ? 'LATEST DROP' : 'THE COLLECTION'}
+          </p>
+          <h1 className="h-xl">{onlyNew ? 'NEW ARRIVALS' : 'CLOTHING'}</h1>
+          <p>
+            Considered garments built from premium materials and cut with restraint.
+            Designed to be worn daily, season after season.
+          </p>
+        </div>
+
+        <div className="catalog-layout">
+          <aside className="filters-desktop" aria-label="Product filters">
+            <FilterContent {...filterProps} />
+          </aside>
+
+          <main>
+            <div className="mobile-filter-bar">
+              <button className="btn btn-sm" onClick={() => setMobileFilters(true)}>
+                <Icon name="sliders" size={14} />
+                <span style={{ marginLeft: 10 }}>FILTERS{filtersActive ? ' •' : ''}</span>
+              </button>
+            </div>
+
+            <div className="catalog-bar">
+              <span className="catalog-count">
+                {results.length} {results.length === 1 ? 'ITEM' : 'ITEMS'}
+              </span>
+              <div className="sort-wrap">
+                <label htmlFor="sort">SORT</label>
+                <select
+                  id="sort"
+                  className="sort-select"
+                  value={sort}
+                  onChange={(e) => setSort(e.target.value)}
+                >
+                  {SORT_OPTIONS.map((o) => (
+                    <option key={o.value} value={o.value}>{o.label}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {results.length > 0 ? (
+              <ProductGrid products={results} onOpen={openProduct} />
+            ) : (
+              <div className="empty-state">
+                <p className="h-lg">NO PRODUCTS FOUND</p>
+                <p className="muted" style={{ maxWidth: '42ch' }}>
+                  Nothing matches your current filters. Try removing a filter or widening the price range.
+                </p>
+                <button className="btn btn-solid" onClick={clearAll}><span>CLEAR ALL FILTERS</span></button>
+              </div>
+            )}
+          </main>
+        </div>
+      </div>
+
+      <div
+        className={`filters-mobile ${mobileFilters ? 'is-open' : ''}`}
+        aria-hidden={!mobileFilters}
+      >
+        <FilterContent {...filterProps} onClose={() => setMobileFilters(false)} />
+      </div>
+    </div>
+  );
+}
+
+/* ACCORDION */
+function Accordion({ items }) {
+  const [open, setOpen] = useState(0);
+  return (
+    <div className="acc">
+      {items.map((it, i) => (
+        <div key={it.title} className={`acc-item ${open === i ? 'is-open' : ''}`}>
+          <button className="acc-head" onClick={() => setOpen(open === i ? -1 : i)} aria-expanded={open === i}>
+            {it.title}
+            <span className="plus" />
+          </button>
+          <div className="acc-body">
+            <div className="acc-body-inner">
+              {Array.isArray(it.content) ? (
+                <ul>{it.content.map((li) => <li key={li}>{li}</li>)}</ul>
+              ) : it.content}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* PRODUCT PAGE */
+function ProductPage({ id }) {
+  const { addToCart, setCartOpen, showToast, isWished, toggleWishlist, formatPrice } = useShop();
+  const product = getProduct(id);
+
+  const [activeImg, setActiveImg] = useState(0);
+  const [color, setColor] = useState(product ? product.colors[0] : null);
+  const [size, setSize] = useState(null);
+  const [qty, setQty] = useState(1);
+  const [error, setError] = useState('');
+  const [sizeGuide, setSizeGuide] = useState(false);
+
+  useEffect(() => {
+    setActiveImg(0);
+    setColor(product ? product.colors[0] : null);
+    setSize(null);
+    setQty(1);
+    setError('');
+  }, [id]);
+
+  useEffect(() => {
+    document.body.classList.toggle('no-scroll', sizeGuide);
+    return () => document.body.classList.remove('no-scroll');
+  }, [sizeGuide]);
+
+  const related = useMemo(() => {
+    if (!product) return [];
+    const sameCat = PRODUCTS.filter((p) => p.id !== product.id && p.category === product.category);
+    const others = PRODUCTS.filter((p) => p.id !== product.id && p.category !== product.category);
+    return [...sameCat, ...others].slice(0, 4);
+  }, [product]);
+
+  if (!product) {
+    return <NotFoundPage />;
+  }
+
+  const needsSize = product.sizes.length > 0;
+  const wished = isWished(product.id);
+
+  const handleAdd = () => {
+    if (needsSize && !size) {
+      setError('Please select a size before adding to bag.');
+      return;
+    }
+    setError('');
+    addToCart(product, { size, color, qty });
+    showToast(`${product.name} added to bag`);
+    setCartOpen(true);
+  };
+
+  return (
+    <div className="page-enter">
+      <div className="page wrap">
+        <div className="pdp">
+          <div className="pdp-gallery">
+            <div className="pdp-main">
+              <SmartImage
+                key={activeImg}
+                src={product.images[activeImg]}
+                alt={`${product.name} — view ${activeImg + 1}`}
+              />
+            </div>
+            {product.images.length > 1 && (
+              <div className="pdp-thumbs">
+                {product.images.map((src, i) => (
+                  <button
+                    key={src + i}
+                    className={i === activeImg ? 'is-active' : ''}
+                    onClick={() => setActiveImg(i)}
+                    aria-label={`View image ${i + 1}`}
+                  >
+                    <SmartImage src={src} alt="" />
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="pdp-info">
+            <div className="pdp-crumb">
+              <button onClick={() => navigate('/')}>HOME</button>
+              <span>/</span>
+              <button onClick={() => navigate('/clothing')}>CLOTHING</button>
+              <span>/</span>
+              <span>{product.category.toUpperCase()}</span>
+            </div>
+
+            <h1 className="pdp-title">{product.name}</h1>
+            <p className="pdp-price">{formatPrice(product.price)}</p>
+            <p className="pdp-desc">{product.description}</p>
+
+            <div>
+              <div className="opt-label">
+                <span>COLOUR — <span style={{ color: 'var(--fg)' }}>{color}</span></span>
+              </div>
+              <div className="color-row-pdp">
+                {product.colors.map((c) => (
+                  <button
+                    key={c}
+                    className={`color-swatch color-swatch-lg ${color === c ? 'is-active' : ''}`}
+                    style={{ background: hexOf(c) }}
+                    onClick={() => setColor(c)}
+                    aria-label={c}
+                    aria-pressed={color === c}
+                    title={c}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {needsSize && (
+              <div>
+                <div className="opt-label">
+                  <span>SIZE {size ? `— ${size}` : ''}</span>
+                  <button onClick={() => setSizeGuide(true)}>SIZE GUIDE</button>
+                </div>
+                <div className="size-grid-pdp">
+                  {product.sizes.map((s) => (
+                    <button
+                      key={s}
+                      className={`size-chip ${size === s ? 'is-active' : ''}`}
+                      onClick={() => { setSize(s); setError(''); }}
+                      aria-pressed={size === s}
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div>
+              <div className="opt-label"><span>QUANTITY</span></div>
+              <div className="qty">
+                <button onClick={() => setQty(Math.max(1, qty - 1))} aria-label="Decrease quantity">
+                  <Icon name="minus" size={15} />
+                </button>
+                <span>{qty}</span>
+                <button onClick={() => setQty(Math.min(10, qty + 1))} aria-label="Increase quantity">
+                  <Icon name="plus" size={15} />
+                </button>
+              </div>
+            </div>
+
+            {error && <p className="field-error" role="alert">{error}</p>}
+
+            <div className="pdp-actions">
+              <button className="btn btn-solid" onClick={handleAdd}>
+                <span>ADD TO BAG — {formatPrice(product.price * qty)}</span>
+              </button>
+              <button
+                className={`wish-btn ${wished ? 'is-active' : ''}`}
+                onClick={() => toggleWishlist(product.id)}
+                aria-label={wished ? 'Remove from wishlist' : 'Add to wishlist'}
+                aria-pressed={wished}
+              >
+                <Icon name="heart" size={17} filled={wished} />
+              </button>
+            </div>
+
+            <div className="pdp-note">
+              <span>Complimentary shipping on orders over {formatPrice(200)}.</span>
+              <span>Free returns within 30 days of delivery.</span>
+            </div>
+
+            <Accordion
+              items={[
+                { title: 'DETAILS & MATERIALS', content: product.details },
+                { title: 'SIZE & FIT', content: product.fit },
+                {
+                  title: 'SHIPPING & RETURNS',
+                  content: [
+                    `Standard delivery 3–5 business days — ${formatPrice(9)}.`,
+                    `Express delivery 1–2 business days — ${formatPrice(19)}.`,
+                    'Free returns within 30 days, unworn with tags attached.',
+                  ],
+                },
+              ]}
+            />
+          </div>
+        </div>
+
+        <section className="section-tight" style={{ paddingBottom: 'clamp(72px,9vw,132px)' }}>
+          <SectionHead title="YOU MAY ALSO LIKE" />
+          <ProductGrid products={related} onOpen={(p) => navigate(`/product/${p.id}`)} />
+        </section>
+      </div>
+
+      {sizeGuide && (
+        <>
+          <div className="overlay is-open" onClick={() => setSizeGuide(false)} />
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Size guide"
+            style={{
+              position: 'fixed', zIndex: 170,
+              top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
+              width: 'min(560px, calc(100vw - 32px))', maxHeight: '86vh', overflowY: 'auto',
+              background: 'var(--bg)', color: 'var(--fg)', padding: '30px',
+              border: '1px solid var(--line-2)',
+              boxShadow: '0 30px 60px -20px rgba(0,0,0,.2)',
+              animation: 'pageIn .35s var(--ease-out) both',
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 22 }}>
+              <span className="h-sm">SIZE GUIDE</span>
+              <button className="icon-btn" onClick={() => setSizeGuide(false)} aria-label="Close size guide">
+                <Icon name="close" size={20} />
+              </button>
+            </div>
+            <p className="muted" style={{ fontSize: 13, lineHeight: 1.9, marginBottom: 20 }}>
+              Measurements are in centimetres. Garments are cut to a relaxed fit —
+              if you prefer a closer silhouette, take one size down.
+            </p>
+            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12.5 }}>
+              <thead>
+                <tr>
+                  {['SIZE', 'CHEST', 'WAIST', 'LENGTH'].map((h) => (
+                    <th
+                      key={h}
+                      style={{
+                        textAlign: 'left', padding: '10px 0',
+                        borderBottom: '1px solid var(--line)',
+                        fontSize: 9.5, letterSpacing: '.2em', color: 'var(--muted)', fontWeight: 500,
+                      }}
+                    >{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['XS', '96', '78', '66'],
+                  ['S', '102', '84', '68'],
+                  ['M', '108', '90', '70'],
+                  ['L', '114', '96', '72'],
+                  ['XL', '120', '102', '74'],
+                  ['XXL', '126', '108', '76'],
+                ].map((row) => (
+                  <tr key={row[0]}>
+                    {row.map((cell, ci) => (
+                      <td
+                        key={ci}
+                        style={{ padding: '11px 0', borderBottom: '1px solid var(--line)', letterSpacing: '.06em' }}
+                      >{cell}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+/* CART DRAWER */
+function ShoppingCart() {
+  const {
+    cart, cartOpen, setCartOpen, updateQty, removeItem,
+    subtotalEUR, cartCount, clearCart, formatPrice,
+  } = useShop();
+
+  const shippingEUR = subtotalEUR >= 200 || subtotalEUR === 0 ? 0 : 9;
+  const totalEUR = subtotalEUR + shippingEUR;
+
+  return (
+    <>
+      <div
+        className={`overlay ${cartOpen ? 'is-open' : ''}`}
+        onClick={() => setCartOpen(false)}
+        aria-hidden="true"
+      />
+      <aside
+        className={`drawer ${cartOpen ? 'is-open' : ''}`}
+        aria-label="Shopping bag"
+        aria-hidden={!cartOpen}
+      >
+        <div className="drawer-head">
+          <span className="h-sm">SHOPPING BAG ({cartCount})</span>
+          <button className="icon-btn" onClick={() => setCartOpen(false)} aria-label="Close bag" tabIndex={cartOpen ? 0 : -1}>
+            <Icon name="close" size={19} />
+          </button>
+        </div>
+
+        {cart.length === 0 ? (
+          <div className="cart-empty">
+            <Icon name="bag" size={34} stroke={1} />
+            <span className="h-sm">YOUR BAG IS EMPTY</span>
+            <p style={{ fontSize: 12.5, maxWidth: '30ch', lineHeight: 1.8 }}>
+              Nothing here yet. Explore the collection and add your first piece.
+            </p>
+            <button className="btn btn-on-dark btn-solid" onClick={() => setCartOpen(false)}>
+              <span>CONTINUE SHOPPING</span>
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className="drawer-body">
+              {cart.map((item) => (
+                <div className="cart-line" key={item.key}>
+                  <SmartImage className="cart-line-img" src={item.image} alt={item.name} />
+                  <div>
+                    <div className="cart-line-top">
+                      <span className="cart-line-name">{item.name}</span>
+                      <span className="cart-line-price">{formatPrice(item.priceEUR * item.qty)}</span>
+                    </div>
+                    <div className="cart-line-meta">
+                      {item.color && <span>Colour: {item.color}</span>}
+                      {item.color && item.size && ' · '}
+                      {item.size && <span>Size: {item.size}</span>}
+                      {!item.color && !item.size && <span>One size</span>}
+                      {' · '}<span>{formatPrice(item.priceEUR)} each</span>
+                    </div>
+                    <div className="cart-line-actions">
+                      <div className="qty-mini">
+                        <button onClick={() => updateQty(item.key, -1)} aria-label="Decrease quantity" tabIndex={cartOpen ? 0 : -1}>
+                          <Icon name="minus" size={13} />
+                        </button>
+                        <span>{item.qty}</span>
+                        <button onClick={() => updateQty(item.key, 1)} aria-label="Increase quantity" tabIndex={cartOpen ? 0 : -1}>
+                          <Icon name="plus" size={13} />
+                        </button>
+                      </div>
+                      <button className="remove-btn" onClick={() => removeItem(item.key)} tabIndex={cartOpen ? 0 : -1}>
+                        REMOVE
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
+              <button
+                className="remove-btn"
+                style={{ marginTop: 20 }}
+                onClick={clearCart}
+                tabIndex={cartOpen ? 0 : -1}
+              >
+                CLEAR BAG
+              </button>
+            </div>
+
+            <div className="drawer-foot">
+              <div className="sum-row"><span>Subtotal</span><span>{formatPrice(subtotalEUR)}</span></div>
+              <div className="sum-row">
+                <span>Shipping</span>
+                <span>{shippingEUR === 0 ? 'Complimentary' : formatPrice(shippingEUR)}</span>
+              </div>
+              <p className="sum-note">
+                Taxes and duties calculated at checkout. Shipping cost is estimated and
+                confirmed on the next step.
+              </p>
+              <div className="sum-row total"><span>Total</span><span>{formatPrice(totalEUR)}</span></div>
+              <button
+                className="btn btn-on-dark btn-solid btn-block"
+                style={{ marginTop: 18 }}
+                onClick={() => { setCartOpen(false); navigate('/checkout'); }}
+                tabIndex={cartOpen ? 0 : -1}
+              >
+                <span>CHECKOUT</span>
+              </button>
+            </div>
+          </>
+        )}
+      </aside>
+    </>
+  );
+}
+
+/* SEARCH */
+const SUGGESTIONS = ['Hoodie', 'Jacket', 'Pants', 'T-Shirt', 'Accessories'];
+
+function SearchOverlay() {
+  const { searchOpen, setSearchOpen, addToCart, setCartOpen, showToast } = useShop();
+  const [query, setQuery] = useState('');
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (searchOpen) {
+      setQuery('');
+      window.setTimeout(() => inputRef.current && inputRef.current.focus(), 220);
+    }
+  }, [searchOpen]);
+
+  const results = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return [];
+    return PRODUCTS.filter((p) =>
+      p.name.toLowerCase().includes(q) ||
+      p.category.toLowerCase().includes(q) ||
+      p.colors.some((c) => c.toLowerCase().includes(q))
+    );
+  }, [query]);
+
+  const handleQuickAdd = (product) => {
+    if (product.sizes.length > 0) {
+      setSearchOpen(false);
+      navigate(`/product/${product.id}`);
+      return;
+    }
+    addToCart(product, { color: product.colors[0] });
+    setSearchOpen(false);
+    setCartOpen(true);
+    showToast(`${product.name} added to bag`);
+  };
+
+  return (
+    <div className={`search-overlay ${searchOpen ? 'is-open' : ''}`} aria-hidden={!searchOpen}>
+      <div className="search-top">
+        <span className="eyebrow" style={{ color: 'var(--d-muted)' }}>SEARCH</span>
+        <button className="icon-btn" onClick={() => setSearchOpen(false)} aria-label="Close search" tabIndex={searchOpen ? 0 : -1}>
+          <Icon name="close" size={20} />
+        </button>
+      </div>
+
+      <div className="search-field">
+        <Icon name="search" size={22} stroke={1.2} />
+        <input
+          ref={inputRef}
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="SEARCH PRODUCTS"
+          aria-label="Search products"
+          tabIndex={searchOpen ? 0 : -1}
+        />
+      </div>
+
+      <div className="search-results">
+        {!query && (
+          <>
+            <p className="search-hint">POPULAR SEARCHES</p>
+            <div className="search-chips">
+              {SUGGESTIONS.map((s) => (
+                <button key={s} className="search-chip" onClick={() => setQuery(s)} tabIndex={searchOpen ? 0 : -1}>
+                  {s}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
+
+        {query && results.length === 0 && (
+          <div className="search-empty">
+            <p className="h-lg">NO PRODUCTS FOUND</p>
+            <p className="muted" style={{ maxWidth: '46ch', color: 'var(--d-muted)' }}>
+              We couldn't find anything matching “{query}”. Try a different term,
+              or browse the full collection.
+            </p>
+            <div className="search-chips">
+              {SUGGESTIONS.map((s) => (
+                <button key={s} className="search-chip" onClick={() => setQuery(s)} tabIndex={searchOpen ? 0 : -1}>
+                  {s}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {query && results.length > 0 && (
+          <>
+            <p className="search-hint">{results.length} RESULT{results.length === 1 ? '' : 'S'}</p>
+            <div className="search-grid">
+              {results.map((p) => (
+                <ProductCard
+                  key={p.id}
+                  product={p}
+                  onQuickAdd={handleQuickAdd}
+                  onOpen={(prod) => { setSearchOpen(false); navigate(`/product/${prod.id}`); }}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* WISHLIST */
+function WishlistPage() {
+  const { wishlist } = useShop();
+  const items = PRODUCTS.filter((p) => wishlist.includes(p.id));
+  const openProduct = useCallback((p) => navigate(`/product/${p.id}`), []);
+
+  return (
+    <div className="page-enter">
+      <div className="page wrap">
+        <div className="page-head">
+          <p className="eyebrow" style={{ marginBottom: 18 }}>SAVED PIECES</p>
+          <h1 className="h-xl">WISHLIST</h1>
+          <p>Pieces you've saved. Stored on this device.</p>
+        </div>
+
+        <div style={{ padding: 'clamp(32px,4vw,54px) 0 clamp(72px,9vw,132px)' }}>
+          {items.length > 0 ? (
+            <ProductGrid products={items} onOpen={openProduct} />
+          ) : (
+            <div className="empty-state">
+              <Icon name="heart" size={32} stroke={1} />
+              <p className="h-lg">YOUR WISHLIST IS EMPTY</p>
+              <p className="muted" style={{ maxWidth: '40ch' }}>
+                Tap the heart on any product to save it here for later.
+              </p>
+              <button className="btn btn-solid" onClick={() => navigate('/clothing')}>
+                <span>CONTINUE SHOPPING</span>
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* COLLECTIONS */
+function CollectionsPage() {
+  const collections = [
+    {
+      title: 'OUTERWEAR',
+      subtitle: 'STRUCTURE & SHELTER',
+      image: U('1539533018447-63fcce2678e3', 1600),
+      to: '/clothing/Jackets',
+    },
+    {
+      title: 'ESSENTIALS',
+      subtitle: 'THE DAILY LAYER',
+      image: U('1521572163474-6864f9cf17ab', 1600),
+      to: '/clothing/T-Shirts',
+    },
+    {
+      title: 'MONOCHROME',
+      subtitle: 'BLACK, GREY, NOTHING ELSE',
+      image: U('1483985988355-763728e1935b', 1600),
+      to: '/clothing',
+    },
+  ];
+
+  return (
+    <div className="page-enter">
+      <div className="page">
+        <div className="wrap" style={{ paddingTop: 'clamp(52px,8vw,112px)', paddingBottom: 'clamp(40px,5vw,72px)' }}>
+          <p className="eyebrow" style={{ marginBottom: 18 }}>SEASON 01</p>
+          <h1 className="h-xl" style={{ maxWidth: '14ch' }}>COLLECTIONS</h1>
+          <p className="muted" style={{ maxWidth: '52ch', marginTop: 24, lineHeight: 1.85 }}>
+            Three chapters, one language. Each collection is built around a small
+            number of pieces, made properly and designed to stay.
+          </p>
+        </div>
+
+        {collections.map((c) => (
+          <section
+            key={c.title}
+            style={{ position: 'relative', height: 'clamp(420px, 72vh, 720px)', overflow: 'hidden', background: 'var(--d-bg)' }}
+          >
+            <SmartImage
+              src={c.image}
+              alt={c.title}
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+            <div
+              style={{
+                position: 'absolute', inset: 0,
+                background: 'linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.74))',
+              }}
+            />
+            <div
+              className="wrap"
+              style={{
+                position: 'relative', zIndex: 3, height: '100%',
+                display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
+                alignItems: 'flex-start', paddingBottom: 'clamp(40px,6vw,78px)', color: '#fff',
+              }}
+            >
+              <span className="eyebrow" style={{ color: 'rgba(255,255,255,.72)', marginBottom: 14 }}>
+                {c.subtitle}
+              </span>
+              <h2 className="h-xl" style={{ marginBottom: 26 }}>{c.title}</h2>
+              <button className="btn btn-on-dark btn-solid" onClick={() => navigate(c.to)}>
+                <span>EXPLORE</span>
+              </button>
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function AboutPage() {
+  return (
+    <div className="page-enter">
+      <div className="page">
+        <div className="wrap" style={{ paddingTop: 'clamp(60px,9vw,132px)' }}>
+          <p className="eyebrow" style={{ marginBottom: 20 }}>ABOUT NOIRÉ</p>
+          <h1 className="h-xl" style={{ maxWidth: '12ch', marginBottom: 32 }}>LESS, BUT BETTER.</h1>
+        </div>
+        <AboutSection />
+      </div>
+    </div>
+  );
+}
+
+/* CHECKOUT */
+function CheckoutPage() {
+  const { cart, subtotalEUR, cartCount, clearCart, formatPrice } = useShop();
+  const [form, setForm] = useState({ email: '', name: '', address: '', city: '', zip: '' });
+  const [errors, setErrors] = useState({});
+  const [done, setDone] = useState(false);
+
+  const shippingEUR = subtotalEUR >= 200 || subtotalEUR === 0 ? 0 : 9;
+  const totalEUR = subtotalEUR + shippingEUR;
+
+  const update = (k, v) => {
+    setForm((f) => ({ ...f, [k]: v }));
+    setErrors((e) => ({ ...e, [k]: '' }));
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
+    const next = {};
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email)) next.email = 'Enter a valid email address.';
+    if (form.name.trim().length < 2) next.name = 'Enter your full name.';
+    if (form.address.trim().length < 4) next.address = 'Enter your street address.';
+    if (form.city.trim().length < 2) next.city = 'Enter your city.';
+    if (form.zip.trim().length < 3) next.zip = 'Enter a valid postal code.';
+    setErrors(next);
+    if (Object.keys(next).length === 0) {
+      setDone(true);
+      clearCart();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  if (done) {
+    return (
+      <div className="page-enter">
+        <div className="page wrap">
+          <div className="info-page" style={{ maxWidth: 620 }}>
+            <p className="eyebrow" style={{ marginBottom: 20 }}>DEMO COMPLETE</p>
+            <h1 className="h-xl" style={{ marginBottom: 24 }}>ORDER SIMULATED</h1>
+            <p style={{ lineHeight: 1.9 }}>
+              This is a front-end demonstration. No payment was processed and no order
+              was created on a server. In a production build this step would hand off to
+              a payment provider and a backend order service.
+            </p>
+            <button className="btn btn-solid" style={{ marginTop: 32 }} onClick={() => navigate('/clothing')}>
+              <span>CONTINUE SHOPPING</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (cart.length === 0) {
+    return (
+      <div className="page-enter">
+        <div className="page wrap">
+          <div className="info-page" style={{ maxWidth: 620 }}>
+            <p className="eyebrow" style={{ marginBottom: 20 }}>CHECKOUT</p>
+            <h1 className="h-xl" style={{ marginBottom: 24 }}>YOUR BAG IS EMPTY</h1>
+            <p>Add a piece to your bag before proceeding to checkout.</p>
+            <button className="btn btn-solid" style={{ marginTop: 32 }} onClick={() => navigate('/clothing')}>
+              <span>CONTINUE SHOPPING</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="page-enter">
+      <div className="page wrap">
+        <div className="page-head">
+          <p className="eyebrow" style={{ marginBottom: 18 }}>STEP 1 OF 1</p>
+          <h1 className="h-xl">CHECKOUT</h1>
+        </div>
+
+        <div className="checkout-layout">
+          <form onSubmit={submit} noValidate>
+            <div className="notice" style={{ marginBottom: 34 }}>
+              <strong>DEMONSTRATION CHECKOUT.</strong> No payment is processed and no data
+              leaves your browser. All fields are validated locally only.
+            </div>
+
+            <h2 className="h-sm" style={{ marginBottom: 20 }}>CONTACT</h2>
+            <div className="field">
+              <label htmlFor="email">EMAIL</label>
+              <input
+                id="email"
+                type="email"
+                value={form.email}
+                onChange={(e) => update('email', e.target.value)}
+                className={errors.email ? 'err' : ''}
+                placeholder="you@example.com"
+              />
+              {errors.email && <span className="field-error">{errors.email}</span>}
+            </div>
+
+            <h2 className="h-sm" style={{ margin: '38px 0 20px' }}>SHIPPING ADDRESS</h2>
+            <div className="field">
+              <label htmlFor="name">FULL NAME</label>
+              <input
+                id="name"
+                value={form.name}
+                onChange={(e) => update('name', e.target.value)}
+                className={errors.name ? 'err' : ''}
+              />
+              {errors.name && <span className="field-error">{errors.name}</span>}
+            </div>
+            <div className="field">
+              <label htmlFor="address">STREET ADDRESS</label>
+              <input
+                id="address"
+                value={form.address}
+                onChange={(e) => update('address', e.target.value)}
+                className={errors.address ? 'err' : ''}
+              />
+              {errors.address && <span className="field-error">{errors.address}</span>}
+            </div>
+            <div className="form-grid">
+              <div className="field">
+                <label htmlFor="city">CITY</label>
+                <input
+                  id="city"
+                  value={form.city}
+                  onChange={(e) => update('city', e.target.value)}
+                  className={errors.city ? 'err' : ''}
+                />
+                {errors.city && <span className="field-error">{errors.city}</span>}
+              </div>
+              <div className="field">
+                <label htmlFor="zip">POSTAL CODE</label>
+                <input
+                  id="zip"
+                  value={form.zip}
+                  onChange={(e) => update('zip', e.target.value)}
+                  className={errors.zip ? 'err' : ''}
+                />
+                {errors.zip && <span className="field-error">{errors.zip}</span>}
+              </div>
+            </div>
+
+            <button type="submit" className="btn btn-solid btn-block" style={{ marginTop: 20 }}>
+              <span>PLACE DEMO ORDER — {formatPrice(totalEUR)}</span>
+            </button>
+          </form>
+
+          <aside className="summary-box">
+            <h2 className="h-sm" style={{ marginBottom: 20 }}>ORDER SUMMARY ({cartCount})</h2>
+            {cart.map((it) => (
+              <div className="summary-line" key={it.key}>
+                <span>
+                  {it.name}
+                  {it.size ? ` · ${it.size}` : ''}
+                  {it.color ? ` · ${it.color}` : ''} × {it.qty}
+                </span>
+                <span>{formatPrice(it.priceEUR * it.qty)}</span>
+              </div>
+            ))}
+            <div className="summary-line"><span>Shipping</span><span>{shippingEUR === 0 ? 'Complimentary' : formatPrice(shippingEUR)}</span></div>
+            <div className="summary-total"><span>Total</span><span>{formatPrice(totalEUR)}</span></div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* INFO PAGES */
+const INFO_PAGES = {
+  contact: {
+    eyebrow: 'GET IN TOUCH',
+    title: 'CONTACT',
+    body: (
+      <>
+        <p>
+          For orders, sizing advice or press enquiries, reach us at{' '}
+          <strong style={{ color: 'var(--fg)' }}>hello@noire.example</strong>.
+          We reply within one business day.
+        </p>
+        <h2>CLIENT SERVICES</h2>
+        <p>Monday to Friday, 09:00 – 18:00 CET.</p>
+        <h2>STUDIO</h2>
+        <p>NOIRÉ Studio<br />14 Rue de la Verrerie<br />75004 Paris, France</p>
+        <h2>PRESS</h2>
+        <p>press@noire.example</p>
+      </>
+    ),
+  },
+  shipping: {
+    eyebrow: 'LOGISTICS',
+    title: 'SHIPPING & RETURNS',
+    body: (
+      <>
+        <h2>SHIPPING</h2>
+        <ul>
+          <li>Standard delivery, 3–5 business days — €9</li>
+          <li>Express delivery, 1–2 business days — €19</li>
+          <li>Complimentary standard shipping on orders over €200</li>
+          <li>All orders are shipped from our European warehouse</li>
+        </ul>
+        <h2>RETURNS</h2>
+        <ul>
+          <li>30 days from delivery to return any item</li>
+          <li>Items must be unworn, with all original tags attached</li>
+          <li>Returns are free within the EU</li>
+          <li>Refunds are processed within 5 business days of receipt</li>
+        </ul>
+        <h2>EXCHANGES</h2>
+        <p>
+          We currently handle exchanges as a return plus a new order, so you can
+          secure your preferred size immediately.
+        </p>
+      </>
+    ),
+  },
+  'size-guide': {
+    eyebrow: 'FIT',
+    title: 'SIZE GUIDE',
+    body: (
+      <>
+        <p>All measurements are in centimetres. Garments are cut to a relaxed, contemporary fit.</p>
+        <h2>TOPS</h2>
+        <ul>
+          <li>XS — chest 96 / length 66</li>
+          <li>S — chest 102 / length 68</li>
+          <li>M — chest 108 / length 70</li>
+          <li>L — chest 114 / length 72</li>
+          <li>XL — chest 120 / length 74</li>
+          <li>XXL — chest 126 / length 76</li>
+        </ul>
+        <h2>TROUSERS</h2>
+        <ul>
+          <li>Waist measurements run 78 / 84 / 90 / 96 / 102 / 108</li>
+          <li>Inseam is 76 cm across all sizes</li>
+        </ul>
+        <h2>HOW TO MEASURE</h2>
+        <p>
+          Measure around the fullest part of your chest, keeping the tape level.
+          For trousers, measure around your natural waistline. If you're between
+          sizes and prefer a closer fit, size down.
+        </p>
+      </>
+    ),
+  },
+  privacy: {
+    eyebrow: 'LEGAL',
+    title: 'PRIVACY POLICY',
+    body: (
+      <>
+        <p>
+          This is a demonstration storefront. No personal data is transmitted to a
+          server, and no analytics or tracking scripts are loaded.
+        </p>
+        <h2>WHAT IS STORED</h2>
+        <ul>
+          <li>Your shopping bag contents, stored locally in your browser (localStorage)</li>
+          <li>Your wishlist, stored locally in your browser (localStorage)</li>
+          <li>Your selected currency, stored locally in your browser (localStorage)</li>
+        </ul>
+        <h2>WHAT IS NOT STORED</h2>
+        <ul>
+          <li>No account data</li>
+          <li>No payment information</li>
+          <li>No cookies for advertising or analytics</li>
+        </ul>
+        <h2>REMOVING YOUR DATA</h2>
+        <p>
+          Clearing your browser's site data removes the bag, wishlist and currency
+          preference completely.
+        </p>
+      </>
+    ),
+  },
+};
+
+function InfoPage({ slug }) {
+  const page = INFO_PAGES[slug];
+  if (!page) return <NotFoundPage />;
+
+  return (
+    <div className="page-enter">
+      <div className="page wrap">
+        <div className="page-head">
+          <p className="eyebrow" style={{ marginBottom: 18 }}>{page.eyebrow}</p>
+          <h1 className="h-xl">{page.title}</h1>
+        </div>
+        <div className="info-page">{page.body}</div>
+      </div>
+    </div>
+  );
+}
+
+/* 404 — now light themed */
+function NotFoundPage() {
+  return (
+    <div className="notfound">
+      <div className="wrap notfound-inner">
+        <span className="notfound-brand">NOIRÉ</span>
+        <div className="notfound-code">404</div>
+        <h1 className="notfound-title">PAGE NOT FOUND</h1>
+        <p className="notfound-text">
+          The page you're looking for doesn't exist, has been moved, or is no longer available.
+          Return to the collection and continue exploring.
+        </p>
+        <div className="notfound-cta">
+          <button className="btn btn-solid" onClick={() => navigate('/')}>
+            <span>BACK TO HOME</span>
+          </button>
+          <button className="btn" onClick={() => navigate('/clothing')}>
+            <span>BROWSE COLLECTION</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* NEWSLETTER */
+function Newsletter() {
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState(null);
+
+  const submit = (e) => {
+    e.preventDefault();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim());
+    if (!valid) {
+      setMessage({ type: 'err', text: 'Please enter a valid email address.' });
+      return;
+    }
+    setMessage({
+      type: 'ok',
+      text: 'Demo only — no address was sent or stored on a server.',
+    });
+    setEmail('');
+  };
+
+  return (
+    <div className="footer-col">
+      <h4>NEWSLETTER</h4>
+      <p style={{ fontSize: 12.5, color: 'var(--d-muted)', lineHeight: 1.8, marginBottom: 14 }}>
+        Early access to new pieces and collection drops.
+      </p>
+      <form className="nl-form" onSubmit={submit} noValidate>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => { setEmail(e.target.value); setMessage(null); }}
+          placeholder="Email address"
+          aria-label="Email address"
+        />
+        <button type="submit">SUBSCRIBE</button>
+      </form>
+      <div className={`nl-msg ${message ? message.type : ''}`} role="status">
+        {message ? message.text : ''}
+      </div>
+    </div>
+  );
+}
+
+/* FOOTER */
+function Footer() {
+  return (
+    <footer className="footer">
+      <div className="wrap">
+        <div className="footer-grid">
+          <div className="footer-brand">
+            <div className="footer-logo">NOIRÉ</div>
+            <p>
+              Premium contemporary clothing built around simplicity, quality and
+              individuality. Designed for everyday life.
+            </p>
+          </div>
+
+          <div className="footer-col">
+            <h4>SHOP</h4>
+            <ul>
+              <li><button onClick={() => navigate('/new-arrivals')}>NEW ARRIVALS</button></li>
+              <li><button onClick={() => navigate('/clothing')}>CLOTHING</button></li>
+              <li><button onClick={() => navigate('/collections')}>COLLECTIONS</button></li>
+              <li><button onClick={() => navigate('/about')}>ABOUT</button></li>
+              <li><button onClick={() => navigate('/wishlist')}>WISHLIST</button></li>
+            </ul>
+          </div>
+
+          <div className="footer-col">
+            <h4>SUPPORT</h4>
+            <ul>
+              <li><button onClick={() => navigate('/contact')}>CONTACT</button></li>
+              <li><button onClick={() => navigate('/shipping')}>SHIPPING &amp; RETURNS</button></li>
+              <li><button onClick={() => navigate('/size-guide')}>SIZE GUIDE</button></li>
+              <li><button onClick={() => navigate('/privacy')}>PRIVACY POLICY</button></li>
+            </ul>
+          </div>
+
+          <Newsletter />
+        </div>
+
+        <div className="footer-bottom">
+          <span className="copy">© 2026 NOIRÉ</span>
+          <div className="socials">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">TIKTOK</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function Toast() {
+  const { toast } = useShop();
+  return (
+    <div className={`toast ${toast ? 'is-open' : ''}`} role="status" aria-live="polite">
+      <span className="dot-ok" />
+      <span>{toast || ''}</span>
+    </div>
+  );
+}
+
+/* SHELL */
+function Shell() {
+  const path = useRoute();
+  const parts = path.split('/').filter(Boolean);
+  const seg = parts[0] || '';
+  const param = parts[1] || null;
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, [path]);
+
+  let page;
+  let isNotFound = false;
+
+  switch (seg) {
+    case '':
+      page = <HomePage />;
+      break;
+    case 'clothing':
+      page = <CatalogPage key={param || 'all'} presetCategory={param || null} />;
+      break;
+    case 'new-arrivals':
+      page = <CatalogPage onlyNew />;
+      break;
+    case 'collections':
+      page = <CollectionsPage />;
+      break;
+    case 'about':
+      page = <AboutPage />;
+      break;
+    case 'product':
+      page = <ProductPage id={param} />;
+      break;
+    case 'wishlist':
+      page = <WishlistPage />;
+      break;
+    case 'checkout':
+      page = <CheckoutPage />;
+      break;
+    case 'contact':
+    case 'shipping':
+    case 'size-guide':
+    case 'privacy':
+      page = <InfoPage slug={seg} />;
+      break;
+    default:
+      isNotFound = true;
+      page = <NotFoundPage />;
+  }
+
+  if (isNotFound) {
+    return (
+      <>
+        <Header path={path} />
+        <main key={path}>{page}</main>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <Header path={path} />
+      <MobileMenu />
+      <main key={path}>{page}</main>
+      <Footer />
+      <ShoppingCart />
+      <SearchOverlay />
+      <Toast />
+    </>
+  );
+}
+
+function App() {
+  return (
+    <ShopProvider>
+      <Shell />
+    </ShopProvider>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
